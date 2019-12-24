@@ -1,7 +1,26 @@
 <template>
-  <div>
-    Posts
-    {{ article }}
+  <div class="columns">
+    <div class="column">
+      <!-- placeholder -->
+    </div>
+
+    <div class="column is-two-thirds">
+      <div v-if="article">
+        <h1 class="title">
+          {{ article.title }}
+        </h1>
+
+        <div v-html="article.content" />
+      </div>
+
+      <div v-else>
+        Loading...
+      </div>
+    </div>
+
+    <div class="column">
+      <!-- placeholder -->
+    </div>
   </div>
 </template>
 
