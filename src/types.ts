@@ -9,6 +9,7 @@ export interface IArticle {
   title: string
   content: string
   created: Moment
+  authorId: number
   likes: number
 
 }

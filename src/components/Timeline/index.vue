@@ -30,7 +30,9 @@
               </a>
             </div>
             <div class="has-text-grey-light">
-            By <a href="#" class="link">lachlan</a> {{ article.created.fromNow() }} <i class="far fa-thumbs-up"></i> {{ article.likes }}
+            By <a href="#" class="link">
+              {{ getUser(article).username }}
+            </a> {{ article.created.fromNow() }} <i class="far fa-thumbs-up"></i> {{ article.likes }}
             </div>
           </div>
         </div>

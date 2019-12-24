@@ -10,6 +10,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 5,
@@ -31,6 +34,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 6,
@@ -38,6 +42,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 7,
@@ -45,6 +50,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 8,
@@ -52,6 +58,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 9,
@@ -59,6 +66,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
   {
     id: 10,
@@ -66,6 +74,7 @@ const mockArticles: IArticle[] = [
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
+    authorId: random(1, 2),
   },
 ]
 
