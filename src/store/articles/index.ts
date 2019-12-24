@@ -1,27 +1,29 @@
-import random from 'lodash/random'
 import { Store } from 'vuex'
 import { Mutations, Module, createMapper, Actions, Getters } from 'vuex-smart-module'
+import random from 'lodash/random'
+import { axios } from '@/resources/mockAxios'
 
-import { IArticle } from '@/types'
+import { IArticle, IHashMap } from '@/types'
 import { mockArticles } from '@/resources/mockArticles'
-
-function get<T>(url: string) { return Promise.resolve() }
-
-const axios = {
-  get
-}
-
-interface IHashMap<T> {
-  [id: number]: T
-}
 
 class ArticlesState {
   ids: number[] = []
   all: IHashMap<IArticle> = {}
+  loading = false
+  touched = false
 }
 
 class ArticlesMutations extends Mutations<ArticlesState> {
-  setArticles(payload: IArticle[]) {
+  REQUEST(payload = {}) {
+    this.state.touched = true
+    this.state.loading = true
+  }
+
+  SUCCESS(payload = {}) {
+    this.state.loading = false    
+  }
+
+  SET_ARTICLES(payload: IArticle[]) {
     const all: IHashMap<IArticle> = {}
     const ids: number[] = []
 
@@ -48,10 +50,12 @@ class ArticlesActions extends Actions<
   ArticlesActions
   > {
   async fetchAll() {
+    this.commit('REQUEST', {})
     return new Promise(resolve => {
       setTimeout(async () => {
         await axios.get<IArticle[]>('/articles')
-        this.commit('setArticles', mockArticles)
+        this.commit('SET_ARTICLES', mockArticles)
+        this.commit('SUCCESS', {})
         resolve()
       }, random(500, 2000))
     })
