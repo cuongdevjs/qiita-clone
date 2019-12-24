@@ -7,7 +7,7 @@
     </div>
     <div class="modal-content">
       <div class="card">
-        blah blah blah
+        <slot />
       </div>
       <!-- Any other Bulma elements you want -->
     </div>
@@ -17,4 +17,18 @@
   </div>
 </template>
 
-<script lang="ts" src="./component.ts" />
+<script lang="ts">
+import { createComponent } from '@vue/composition-api'
+
+export default createComponent({
+  setup(props, ctx) {
+    const hide = () => {
+      ctx.emit('hide')
+    }
+
+    return {
+      hide
+    }
+  },
+})
+</script>

@@ -25,31 +25,80 @@
         <div class="level">
           <div>
             <div>
-              <a href="#" class="link">
+              <RouterLink
+                :to="linkTo(article.id)"
+                class="link"
+              >
                 {{ article.title }}
-              </a>
+              </RouterLink>
             </div>
             <div class="has-text-grey-light">
-            By <a href="#" class="link">
-              {{ getUser(article).username }}
-            </a> {{ article.created.fromNow() }} <i class="far fa-thumbs-up"></i> {{ article.likes }}
+              By 
+              <RouterLink to='#' class="link">
+                {{ getUser(article).username }}
+              </RouterLink> 
+              {{ article.created.fromNow() }} 
+
+              <span @click="() => toggleShareModal(true)">
+                <i class="far fa-thumbs-up" />
+                {{ article.likes }}
+              </span>
             </div>
           </div>
         </div>
       </a>
     </span>
 
-    <portal to="modal">
+    <Portal to="modal">
       <Modal
         v-show="showShareModal"
         @hide="() => toggleShareModal(false)"
-      />
-    </portal>
+      >
+        <SignUp />
+      </Modal>
+    </Portal>
 
   </nav>
 </template>
 
-<script lang="ts" src="./component.ts" />
+<script lang="ts">
+import { createComponent, computed, ref } from '@vue/composition-api'
+
+import SignUp from '@/components/SignUp.vue'
+import Modal from '@/components/Modal/index.vue'
+import { useArticles } from '@/store/articles'
+import { useUsers } from '@/store/users'
+import { IArticle, IUser } from '@/types'
+
+
+export default createComponent({
+  components: {
+    SignUp,
+    Modal,
+  },
+
+  setup(props, ctx) {
+    const articles = useArticles(ctx.root.$store)
+    const users = useUsers(ctx.root.$store)
+    const linkTo = (id: number) => `/posts/${id}`
+    articles.actions.fetchAll()
+
+    const showShareModal = ref(false)
+    const toggleShareModal = (value: boolean) => {
+      showShareModal.value = value
+    }
+
+    return {
+      articles: computed(() => articles.getters.articles),
+      loading: computed(() => articles.state.loading || !articles.state.touched),
+      linkTo,
+      showShareModal,
+      toggleShareModal,
+      getUser: (article: IArticle): IUser => users.getters.getById(article.authorId)
+    }
+  },
+})
+</script>
 
 <style scoped>
 a.link:hover {

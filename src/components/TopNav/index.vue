@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" link="#">
+      <RouterLink class="navbar-item" to="/">
         <h4 class="title is-4">Vue Composition API Demo</h4>
-      </a>
+      </RouterLink>
 
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
