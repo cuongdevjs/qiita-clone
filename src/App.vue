@@ -1,33 +1,22 @@
 <template>
   <div>
+    <portal-target name="modal">
+      <!--
+      This component can be located anywhere in your App.
+      The slot content of the above portal component will be rendered here.
+      -->
+    </portal-target>
+
     <TopNav />
 
     <section class="section">
       <div class="container">
-        <div class="columns">
-          <div class="column">
-            ...
-          </div>
-
-          <div class="column is-two-thirds">
-            <Timeline />
-          </div>
-
-          <div class="column">
-            ...
-          </div>
-        </div>
+        <router-view />
       </div>
     </section>
 
-    <div>
-    </div>
-    <router-view/>
   </div>
 </template>
 
 <script lang="ts" src="./app.ts">
 </script>
-
-<style>
-</style>

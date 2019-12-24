@@ -38,6 +38,14 @@
         </div>
       </a>
     </span>
+
+    <portal to="modal">
+      <Modal
+        v-show="showShareModal"
+        @hide="() => toggleShareModal(false)"
+      />
+    </portal>
+
   </nav>
 </template>
 

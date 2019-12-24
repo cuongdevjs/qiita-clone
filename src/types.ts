@@ -1,7 +1,7 @@
 import { Moment } from 'moment'
 
 export interface IHashMap<T> {
-  [id: number]: T
+  [key: string]: T
 }
 
 export interface IArticle {

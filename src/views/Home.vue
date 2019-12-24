@@ -1,16 +1,26 @@
 <template>
-  <div class="home">
+  <div class="columns">
+    <div class="column">
+      <!-- placeholder -->
+    </div>
+
+    <div class="column is-two-thirds">
+      <Timeline />
+    </div>
+
+    <div class="column">
+      <!-- placeholder -->
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Timeline from '@/components/Timeline/index.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    Timeline
   }
 }
 </script>

@@ -60,6 +60,18 @@ class ArticlesActions extends Actions<
       }, random(500, 2000))
     })
   }
+
+  async fetchById(id: string) {
+    this.commit('REQUEST', {})
+    return new Promise(resolve => {
+      setTimeout(async () => {
+        await axios.get<IArticle>(`/articles/${id}`)
+        this.commit('SET_ARTICLES', [mockArticles[0]])
+        this.commit('SUCCESS', {})
+        resolve()
+      }, random(500, 2000))
+    })
+  }
 }
 
 const articles = new Module({

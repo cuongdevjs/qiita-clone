@@ -1,13 +1,15 @@
 import random from 'lodash/random'
 import moment from 'moment'
 
+import data from './article.txt'
+
 import { IArticle } from '@/types'
 
 const mockArticles: IArticle[] = [
   {
     id: 1,
     title: 'Hacking with Vue and TypeScript',
-    content: '',
+    content: data,
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
