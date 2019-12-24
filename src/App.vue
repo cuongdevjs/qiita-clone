@@ -3,10 +3,16 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <div v-for="article in articles" :key="article.id">
+        {{ article.title }}
+      </div>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script lang="ts" src="./app.ts">
+</script>
 
 <style>
 #app {
