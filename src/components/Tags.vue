@@ -1,6 +1,7 @@
 <template>
   <div class="field is-grouped">
     <input 
+      id="new-tag"
       v-model="newTag"
       @keyup.enter="handleCreate"
       type="text" 
