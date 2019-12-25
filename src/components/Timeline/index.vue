@@ -54,9 +54,10 @@
         v-show="showShareModal"
         @hide="() => toggleShareModal(false)"
       >
-        <SignUp />
+        <SignUp @cancel="() => toggleShareModal(false)" />
       </Modal>
     </Portal>
+
 
   </nav>
 </template>

@@ -1,56 +1,45 @@
 <template>
-  <div>
+  <section class="section">
     <ValidatorInput 
       v-model="username"
       type="text"
       label="Username"
       :validation="usernameValidation"
+      placeholder="Username"
     />
 
-    <div class="field">
-      <label class="label">Email</label>
-        <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
+    <ValidatorInput 
+      v-model="email"
+      type="text"
+      label="Email"
+      :validation="emailValidation"
+      placeholder="Email"
+    />
 
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="password" placeholder="Password" v-model="password">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
+    <ValidatorInput 
+      v-model="password"
+      type="text"
+      label="Password"
+      :validation="usernameValidation"
+      placeholder="Password"
+    />
 
-    <div class="field is-grouped">
+    <div class="field is-grouped" id="signup__controls">
       <div class="control">
-        <button class="button is-link">Submit</button>
+        <button @click="handleCancel" class="button is-link is-light">Cancel</button>
       </div>
       <div class="control">
-        <button class="button is-link is-light">Cancel</button>
+        <button class="button is-primary">Submit</button>
       </div>
     </div>
-  </div>  
+  </section>  
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { createComponent, ref } from '@vue/composition-api'
 
-import { minLength, Rule } from '@/components/validation'
+import { minLength, Rule, format } from '@/components/validation'
 import ValidatorInput from '@/components/ValidatorInput.vue'
 
 export default createComponent({
@@ -60,7 +49,7 @@ export default createComponent({
     ValidatorInput,
   },
 
-  setup() {
+  setup(props, ctx) {
     const username = ref('')
     const password = ref('')
     const email = ref('')
@@ -69,12 +58,28 @@ export default createComponent({
       minLength({ min: 5, max: 20 })
     ]
 
+    const emailValidation: Rule[] = [
+      format(new RegExp(/\w{2,}.*@\w{3,}.*\.\w{2,}/))
+    ]
+    const handleCancel = () => {
+      ctx.emit('cancel')
+    }
+
     return {
       username: username.value,    
       usernameValidation,
+      emailValidation,
+      handleCancel,
+      passwordValidation: usernameValidation,
       password: password.value,    
       email: email.value,
     }
   }
 })
 </script>
+
+<style>
+#signup__controls {
+  justify-content: flex-end;
+}
+</style>

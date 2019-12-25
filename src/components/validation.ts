@@ -17,6 +17,11 @@ interface ValidationStatus {
   message?: string
 }
 
+const format = (regexp: RegExp): Format => ({
+  name: 'format',
+  regexp
+})
+
 const minLength = ({ min, max }: MinLengthPayload): MinLength => ({
   name: 'min-length',
   min,
@@ -33,8 +38,10 @@ const validate = (value: string, rules: Rule[], validMessage?: string): Validati
         message: `Value must be between ${rule.min} and ${rule.max}`,
       }
     }
+    if (rule.name === 'format') 
+      console.log(rule.name.match(rule.regexp))
 
-    if (rule.name === 'format' && !rule.name.match(rule.regexp)) {
+    if (rule.name === 'format' && !value.match(rule.regexp)) {
       return {
         valid: false,
         message: 'Value does not match required format',
@@ -49,6 +56,7 @@ const validate = (value: string, rules: Rule[], validMessage?: string): Validati
 }
 
 export {
+  format,
   minLength,
   validate,
 }
