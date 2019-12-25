@@ -6,6 +6,7 @@
       :validation="titleValidation"
       placeholder="Title"
     />
+    <Tags />
     <div class="columns">
       <div class="column one-half">
         <textarea 
@@ -19,6 +20,17 @@
           id="rendered-markdown"
           v-html="html"
         />
+
+        <br />
+        <div class="buttons">
+          <div class="button is-light">
+            Save Draft
+          </div>
+
+          <div class="button is-primary">
+            Post
+          </div>
+        </div>
       </div>
     </div>
   </div>  
@@ -28,8 +40,9 @@
 import { createComponent, ref, watch } from '@vue/composition-api'
 import marked from 'marked'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css';
+import 'highlight.js/styles/github.css'
 
+import Tags from '@/components/Tags.vue'
 import ValidatorInput from '@/components/ValidatorInput.vue'
 import { minLength } from '@/components/validation'
 
@@ -39,6 +52,7 @@ export default createComponent({
   props: {},
 
   components: {
+    Tags,
     ValidatorInput,
   },
 
@@ -86,6 +100,10 @@ export default createComponent({
 </script>
 
 <style>
+.buttons {
+  justify-content: flex-end;
+}
+
 #markdown, #rendered-markdown {
   min-height: 400px;
 }
