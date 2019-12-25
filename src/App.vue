@@ -1,29 +1,22 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <portal-target name="modal">
+      <!--
+      This component can be located anywhere in your App.
+      The slot content of the above portal component will be rendered here.
+      -->
+    </portal-target>
+
+    <TopNav />
+
+    <section class="section">
+      <div class="container">
+        <router-view />
+      </div>
+    </section>
+
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-
-export default Vue.extend({
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-});
+<script lang="ts" src="./app.ts">
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
