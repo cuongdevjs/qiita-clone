@@ -71,7 +71,6 @@ import { useArticles } from '@/store/articles'
 import { useUsers } from '@/store/users'
 import { IArticle, IUser } from '@/types'
 
-
 export default createComponent({
   components: {
     SignUp,

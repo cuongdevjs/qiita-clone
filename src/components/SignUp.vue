@@ -61,6 +61,7 @@ export default createComponent({
     const emailValidation: Rule[] = [
       format(new RegExp(/\w{2,}.*@\w{3,}.*\.\w{2,}/))
     ]
+
     const handleCancel = () => {
       ctx.emit('cancel')
     }

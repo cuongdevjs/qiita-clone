@@ -65,7 +65,7 @@ export default createComponent({
 
     const handleBlur = () => {
       if (props.validation) {
-        const { valid, message } = validate(props.value, props.validation, 'All good')
+        const { valid, message } = validate(props.value, props.validation)
         validity.valid = valid
         validity.message = message
         blurred.value = true
