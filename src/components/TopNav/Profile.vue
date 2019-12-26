@@ -57,6 +57,7 @@ export default createComponent({
 }
 
 .profile__dropdown {
+  background: white;
   padding: 8px;
   position: absolute;
   width: 150px;

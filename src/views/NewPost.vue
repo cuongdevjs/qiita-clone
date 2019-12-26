@@ -32,9 +32,10 @@
       <div class="column">
         <button 
           type="submit" 
-          class="button is-info is-small is-pulled-right"
+          class="button is-info is-light is-small is-pulled-right"
+          @click="showPreview = !showPreview"
         > 
-          Hide Preview
+          {{ showPreview ? 'Hide Preview' : 'Show Preview' }}
         </button>
       </div>
     </div>
@@ -48,15 +49,21 @@
           v-model="content"
         />
       </div>
-      <div class="column one-half">
+      <div 
+       v-if="showPreview" 
+        class="column one-half"
+      >
         <div 
           class="post-html"
           id="rendered-markdown"
           v-html="html"
         />
+      </div>
+    </div>
 
-        <br />
-        <div class="buttons">
+    <div class="columns">
+      <div class="column">
+        <div class="buttons is-pulled-right">
           <div class="button is-light">
             Save Draft
           </div>
@@ -95,6 +102,7 @@ export default createComponent({
     const titleValidation = [ minLength({ min: 5, max: 100 }) ]
     const tags = ref<string[]>(['javascript', 'programming'])
     const newTag = ref('')
+    const showPreview = ref(true)
 
     watch(() => content.value, (val) => {
       marked(content.value, options, (err, res) => {
@@ -121,6 +129,7 @@ export default createComponent({
       title,
       newTag,
       tags,
+      showPreview,
       handleAddTag,
       handleRemoveTag,
       titleValidation,
@@ -134,6 +143,10 @@ export default createComponent({
 
 .buttons {
   justify-content: flex-end;
+}
+
+#new-tag {
+  margin: 0 8px 0 0;
 }
 
 #markdown, #rendered-markdown {
