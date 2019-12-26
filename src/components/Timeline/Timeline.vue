@@ -33,21 +33,41 @@
     <Portal to="modal">
       <Modal
         v-show="showShareModal"
-        @hide="() => toggleShareModal(false)"
+        @hide="showShareModal = false"
       >
-        <SignUp @cancel="() => toggleShareModal(false)" />
+        <SignUp @signup="handleSignup">
+          <template v-slot:buttons>
+            <div class="control">
+              <button 
+                type="button" 
+                class="button is-link is-light"
+                @click="showShareModal = false"
+              >
+                Cancel
+              </button>
+            </div>
+            <div class="control">
+              <button 
+                type="submit" 
+                class="button is-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </template> 
+        </SignUp>
+
       </Modal>
     </Portal>
-
-
   </nav>
 </template>
 
 <script lang="ts">
 import { createComponent, computed, ref, reactive, toRefs } from '@vue/composition-api'
 
-import SignUp from '@/components/SignUp.vue'
+import SignUp from '@/components/SignUp/SignUp.vue'
 import Modal from '@/components/Modal/index.vue'
+import { NewUser } from '../SignUp/types'
 import TimelineItem from '@/components/TimelineItem.vue'
 import { useArticles } from '@/store/articles'
 import { IArticle } from '../../types'
@@ -61,6 +81,8 @@ export default createComponent({
     TimelineItem,
   },
 
+  props: {},
+
   setup(props, ctx) {
     const articles = useArticles(ctx.root.$store)
     const tabs = ref<Period>(['Today', 'This Week', 'This Month'])
@@ -69,9 +91,6 @@ export default createComponent({
     articles.actions.fetchAll()
 
     const showShareModal = ref(false)
-    const toggleShareModal = (value: boolean) => {
-      showShareModal.value = value
-    }
 
     const setActiveTab = (period: Period) => {
       currentPeriod.value = period
@@ -82,7 +101,11 @@ export default createComponent({
         return
       }
 
-      toggleShareModal(true)
+      showShareModal.value = true
+    }
+
+    const handleSignup = (newUser: NewUser) => {
+      console.log('newUser', newUser)
     }
 
     const display = computed(() => { 
@@ -96,10 +119,10 @@ export default createComponent({
       loading: computed(() => articles.state.loading || !articles.state.touched),
       tabs,
       currentPeriod,
+      handleSignup,
       handleLike,
       setActiveTab,
       showShareModal,
-      toggleShareModal,
     }
   },
 })

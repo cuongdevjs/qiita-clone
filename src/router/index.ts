@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Posts from '../views/Posts.vue'
 import NewPost from '../views/NewPost.vue'
+import NewUser from '../views/NewUser.vue'
 
 Vue.use(VueRouter)
 
@@ -22,9 +23,15 @@ const routes = [
     path: '/posts/:id?',
     name: 'posts',
     component: Posts
+  },
+  {
+    path: '/users/new',
+    name: 'new-user',
+    component: NewUser,
   }
 ]
 
+// @ts-ignore
 const router = new VueRouter({
   routes,
   mode: 'history'

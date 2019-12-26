@@ -21,6 +21,8 @@
 import { createComponent } from '@vue/composition-api'
 
 export default createComponent({
+  props: {},
+
   setup(props, ctx) {
     const hide = () => {
       ctx.emit('hide')

@@ -5,7 +5,7 @@
       <input 
         class="input" 
         :class="blurred && (validity.valid ? 'is-success' : 'is-danger')"
-        type="text" 
+        :type="type" 
         :placeholder="placeholder" 
         :value="value"
         @input="handleInput"

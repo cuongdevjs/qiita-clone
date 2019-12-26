@@ -25,9 +25,9 @@
             >
               New Post
             </RouterLink>
-            <a class="button is-primary">
+            <RouterLink class="button is-primary" to="/users/new">
               <strong>Sign up</strong>
-            </a>
+            </RouterLink>
             <a class="button is-light">
               Log in
             </a>

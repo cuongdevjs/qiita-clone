@@ -15,10 +15,11 @@
 </template>
 
 <script>
-import Timeline from '@/components/Timeline/index.vue'
+import Timeline from '@/components/Timeline/Timeline.vue'
 
 export default {
   name: 'home',
+  props: {},
   components: {
     Timeline
   }
