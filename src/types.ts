@@ -19,4 +19,5 @@ export interface IUser {
   username: string
   profile: string
   following: boolean
+  isCurrentUser: boolean
 }

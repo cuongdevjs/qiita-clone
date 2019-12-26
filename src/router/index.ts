@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import Posts from '../views/Posts.vue'
+import LoginView from '../views/LoginView.vue'
 import NewPost from '../views/NewPost.vue'
 import NewUser from '../views/NewUser.vue'
 
@@ -28,7 +29,12 @@ const routes = [
     path: '/users/new',
     name: 'new-user',
     component: NewUser,
-  }
+  },
+  {
+    path: '/users/login',
+    name: 'login',
+    component: LoginView,
+  },
 ]
 
 // @ts-ignore

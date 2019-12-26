@@ -20,16 +20,35 @@
         <div class="navbar-item">
           <div class="buttons">
             <RouterLink 
+              v-if="authenticated"
               class="button"
               to="/posts/new"
             >
               New Post
             </RouterLink>
-            <RouterLink class="button is-primary" to="/users/new">
+
+            <RouterLink 
+              v-if="!authenticated"
+              class="button is-primary" 
+              to="/users/new"
+            >
               <strong>Sign up</strong>
             </RouterLink>
-            <a class="button is-light">
+
+            <RouterLink
+              v-if="!authenticated"
+              class="button is-light"
+              to="/users/login"
+            >
               Log in
+            </RouterLink>
+
+            <a
+              v-if="authenticated"
+              class="button is-light"
+              @click="handleLogout"
+            >
+              Log out
             </a>
           </div>
         </div>
@@ -38,7 +57,30 @@
   </nav>
 </template>
 
-<script lang="ts" src="./topNav.ts" />
+<script lang="ts"> 
+import { createComponent, computed } from '@vue/composition-api'
+
+import { useUsers } from '@/store/users'
+
+export default createComponent({
+  setup(props, ctx) {
+    const users = useUsers(ctx.root.$store)
+
+    const handleLogout = async () => {
+      await users.actions.logout()
+
+      if (ctx.root.$route.path !== '/') {
+        ctx.root.$router.push('/')
+      }
+    }
+
+    return {
+      authenticated: computed(() => users.state.authenticated),
+      handleLogout,
+    }
+  },
+})
+</script>
 
 <style scoped>
 </style>
