@@ -13,40 +13,21 @@
 
     <span v-else>
       <p class="panel-tabs">
-        <a class="is-active">Today</a>
-        <a>This Week</a>
-        <a>This Month</a>
+        <a
+          v-for="tab in tabs"
+          :key="tab.title"
+          :class="[ tab.active ? 'is-active' : '']"
+          @click="() => setActiveTab(tab)"
+        >
+          {{ tab.title }}
+        </a>
       </p>
-      <a 
+      <TimelineItem
         v-for="article in articles" 
         :key="article.id"
-        class="panel-block"
-      >
-        <div class="level">
-          <div>
-            <div>
-              <RouterLink
-                :to="linkTo(article.id)"
-                class="link"
-              >
-                {{ article.title }}
-              </RouterLink>
-            </div>
-            <div class="has-text-grey-light">
-              By 
-              <RouterLink to='#' class="link">
-                {{ getUser(article).username }}
-              </RouterLink> 
-              {{ article.created.fromNow() }} 
-
-              <span @click="() => toggleShareModal(true)">
-                <i class="far fa-thumbs-up" />
-                {{ article.likes }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </a>
+        :article="article"
+        @like="handleLike"
+      />
     </span>
 
     <Portal to="modal">
@@ -63,24 +44,34 @@
 </template>
 
 <script lang="ts">
-import { createComponent, computed, ref } from '@vue/composition-api'
+import { createComponent, computed, ref, reactive } from '@vue/composition-api'
 
 import SignUp from '@/components/SignUp.vue'
 import Modal from '@/components/Modal/index.vue'
+import TimelineItem from '@/components/TimelineItem.vue'
 import { useArticles } from '@/store/articles'
-import { useUsers } from '@/store/users'
-import { IArticle, IUser } from '@/types'
+import { IArticle } from '../../types'
+
+interface ITab {
+  title: 'Today' | 'This Week' | 'This Month'
+  active: boolean
+}
 
 export default createComponent({
   components: {
-    SignUp,
     Modal,
+    SignUp,
+    TimelineItem,
   },
 
   setup(props, ctx) {
     const articles = useArticles(ctx.root.$store)
-    const users = useUsers(ctx.root.$store)
-    const linkTo = (id: number) => `/posts/${id}`
+    const tabs = ref<ITab[]>([
+      { title: 'Today', active: true },
+      { title: 'This Week', active: false },
+      { title: 'This Month', active: false },
+    ])
+
     articles.actions.fetchAll()
 
     const showShareModal = ref(false)
@@ -88,13 +79,30 @@ export default createComponent({
       showShareModal.value = value
     }
 
+    const setActiveTab = (targetTab: ITab) => {
+      tabs.value = tabs.value.map(tab => {
+        return tab.title === targetTab.title
+          ? { ...tab, active: true }
+          : { ...tab, active: false }
+      })
+    }
+
+    const handleLike = (article: IArticle) => {
+      if (!1) {
+        return
+      }
+
+      toggleShareModal(true)
+    }
+
     return {
       articles: computed(() => articles.getters.articles),
       loading: computed(() => articles.state.loading || !articles.state.touched),
-      linkTo,
+      tabs,
+      handleLike,
+      setActiveTab,
       showShareModal,
       toggleShareModal,
-      getUser: (article: IArticle): IUser => users.getters.getById(article.authorId)
     }
   },
 })
