@@ -50,6 +50,8 @@
             >
               Log out
             </a>
+
+            <Profile v-if="authenticated" />
           </div>
         </div>
       </div>
@@ -61,8 +63,13 @@
 import { createComponent, computed } from '@vue/composition-api'
 
 import { useUsers } from '@/store/users'
+import Profile from './Profile.vue'
 
 export default createComponent({
+  components: {
+    Profile,
+  },
+
   setup(props, ctx) {
     const users = useUsers(ctx.root.$store)
 

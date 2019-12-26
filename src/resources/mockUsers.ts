@@ -6,7 +6,7 @@ const mockUsers: IUser[] = [
     username: 'Lachlan',
     following: true,
     profile: 'Full stack developer with an interest in Vue and TypeScript',
-    isCurrentUser: false,
+    isCurrentUser: true,
   },
   {
     id: 2,

@@ -16,7 +16,7 @@ class UsersState {
   }
   loading = false
   touched = true
-  authenticated = false
+  authenticated = true
 }
 
 class UserGetters extends Getters<UsersState> {
