@@ -14,20 +14,20 @@
     <div class="columns">
       <div class="column">
         <div class="field is-grouped">
-        <input 
-          id="new-tag"
-          v-model="newTag"
-          @keyup.enter="handleAddTag"
-          type="text" 
-          class="input is-small is-inline"
-          placeholder="Enter a tag"
-        >
-        <Tags 
-          :tags="tags"
-          @removeTag="handleRemoveTag"
-        />
-      </div>
+          <input 
+            id="new-tag"
+            v-model="newTag"
+            @keyup.enter="handleAddTag"
+            type="text" 
+            class="input is-small is-inline"
+            placeholder="Enter a tag"
+          >
+          <Tags 
+            :tags="tags"
+            @removeTag="handleRemoveTag"
+          />
         </div>
+      </div>
 
       <div class="column">
         <button 
@@ -39,23 +39,22 @@
         </button>
       </div>
     </div>
-    <!-- </div> -->
 
     <div class="columns">
       <div class="column one-half">
-        <textarea 
+        <div 
           id="markdown"
-          class="textarea"
-          v-model="content"
+          contenteditable
+          @keyup="handleEdit"
         />
       </div>
       <div 
-       v-if="showPreview" 
+        v-show="showPreview" 
         class="column one-half"
       >
         <div 
-          class="post-html"
           id="rendered-markdown"
+          class="post-html"
           v-html="html"
         />
       </div>
@@ -78,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { createComponent, ref, watch } from '@vue/composition-api'
+import { createComponent, ref, watch, onMounted } from '@vue/composition-api'
 import marked from 'marked'
 
 import Tags from '@/components/Tags.vue'
@@ -102,7 +101,7 @@ export default createComponent({
     },
   },
 
-  setup(props) {
+  setup(props, ctx) {
     const title = ref(props.post.title)
     const content = ref(props.post.content)
     const tags = ref(props.post.tags)
@@ -110,6 +109,16 @@ export default createComponent({
     const titleValidation = [ minLength({ min: 5, max: 100 }) ]
     const newTag = ref('')
     const showPreview = ref(true)
+
+    onMounted(() => {
+      // @ts-ignore
+      ctx.root.$el.querySelector('#markdown')!.innerText = props.post.content
+    })
+
+    const handleEdit = (e: any) => {
+      // @ts-ignore
+      content.value = ctx.root.$el.querySelector('#markdown')!.innerText
+    }
 
     watch(() => content.value, (val) => {
       marked(content.value, options, (err, res) => {
@@ -137,6 +146,7 @@ export default createComponent({
       newTag,
       tags,
       showPreview,
+      handleEdit,
       handleAddTag,
       handleRemoveTag,
       titleValidation,
@@ -158,6 +168,10 @@ export default createComponent({
 
 #markdown, #rendered-markdown {
   min-height: 400px;
+}
+
+#markdown {
+  white-space: pre-wrap;
 }
 
 #rendered-markdown {
