@@ -15,11 +15,11 @@
       <p class="panel-tabs">
         <a
           v-for="tab in tabs"
-          :key="tab.title"
-          :class="[ tab.active ? 'is-active' : '']"
+          :key="tab"
+          :class="[ tab === currentPeriod ? 'is-active' : '']"
           @click="() => setActiveTab(tab)"
         >
-          {{ tab.title }}
+          {{ tab }}
         </a>
       </p>
       <TimelineItem
@@ -44,18 +44,15 @@
 </template>
 
 <script lang="ts">
-import { createComponent, computed, ref, reactive } from '@vue/composition-api'
+import { createComponent, computed, ref, reactive, toRefs } from '@vue/composition-api'
 
 import SignUp from '@/components/SignUp.vue'
 import Modal from '@/components/Modal/index.vue'
 import TimelineItem from '@/components/TimelineItem.vue'
 import { useArticles } from '@/store/articles'
 import { IArticle } from '../../types'
-
-interface ITab {
-  title: 'Today' | 'This Week' | 'This Month'
-  active: boolean
-}
+import { Period } from './types'
+import { filterByPeriod } from './filters'
 
 export default createComponent({
   components: {
@@ -66,11 +63,8 @@ export default createComponent({
 
   setup(props, ctx) {
     const articles = useArticles(ctx.root.$store)
-    const tabs = ref<ITab[]>([
-      { title: 'Today', active: true },
-      { title: 'This Week', active: false },
-      { title: 'This Month', active: false },
-    ])
+    const tabs = ref<Period>(['Today', 'This Week', 'This Month'])
+    const currentPeriod = ref<Period>('Today')
 
     articles.actions.fetchAll()
 
@@ -79,12 +73,8 @@ export default createComponent({
       showShareModal.value = value
     }
 
-    const setActiveTab = (targetTab: ITab) => {
-      tabs.value = tabs.value.map(tab => {
-        return tab.title === targetTab.title
-          ? { ...tab, active: true }
-          : { ...tab, active: false }
-      })
+    const setActiveTab = (period: Period) => {
+      currentPeriod.value = period
     }
 
     const handleLike = (article: IArticle) => {
@@ -95,10 +85,17 @@ export default createComponent({
       toggleShareModal(true)
     }
 
+    const display = computed(() => { 
+      return filterByPeriod(
+        currentPeriod.value,
+        articles.getters.articles)
+    })
+
     return {
-      articles: computed(() => articles.getters.articles),
+      articles: display,
       loading: computed(() => articles.state.loading || !articles.state.touched),
       tabs,
+      currentPeriod,
       handleLike,
       setActiveTab,
       showShareModal,
