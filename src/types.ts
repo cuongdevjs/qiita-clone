@@ -12,6 +12,7 @@ export interface IArticle {
   created: Moment
   authorId: number
   likes: number
+  tags: string[]
 
 }
 

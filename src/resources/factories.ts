@@ -10,6 +10,7 @@ const article: IArticle = {
   created: moment(),
   likes: 1,
   authorId: 1,
+  tags: ['vuejs', 'web development', '2020']
 }
 
 export {

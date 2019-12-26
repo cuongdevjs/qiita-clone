@@ -15,6 +15,7 @@ const mockArticles: IArticle[] = [
     created: moment(),
     likes: random(0, 100),
     authorId: 1,
+    tags: ['javascript', 'typescript', 'vuejs'],
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['javascript', 'react', 'vuejs'],
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['vuejs', 'tutorial'],
   },
   {
     id: 5,
@@ -42,6 +45,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: [],
   },
   {
     id: 6,
@@ -51,6 +55,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['javascript', 'programming'],
   },
   {
     id: 7,
@@ -60,6 +65,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['vuejs'],
   },
   {
     id: 8,
@@ -69,6 +75,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['vuejs', 'firebase', 'authentication'],
   },
   {
     id: 9,
@@ -78,6 +85,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['vuejs', 'handbook', 'guide'],
   },
   {
     id: 10,
@@ -87,6 +95,7 @@ const mockArticles: IArticle[] = [
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
+    tags: ['vuejs', 'devtools'],
   },
 ]
 

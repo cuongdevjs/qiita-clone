@@ -18,18 +18,15 @@ localVue.use(VueRouter)
 
 import TimelineItem from '../TimelineItem.vue'
 import { IArticle } from '@/types'
+import { article as mockArticle } from '@/resources/factories'
 
 
 describe('TimelineItem', () => {
   it('renders information correctly', async () => {
     const article: IArticle = {
+      ...mockArticle,
       id: 1,
       title: 'My article',
-      content: 'Content',
-      markdown: '',
-      created: moment(),
-      authorId: 1,
-      likes: 10,
     }
 
     const wrapper = mount(TimelineItem, { 
@@ -47,13 +44,9 @@ describe('TimelineItem', () => {
 
   it('triggers a like event', async () => {
     const article: IArticle = {
+      ...mockArticle,
       id: 1,
       title: 'My article',
-      content: 'Content',
-      created: moment(),
-      markdown: '',
-      authorId: 1,
-      likes: 10,
     }
 
     const wrapper = mount(TimelineItem, { 

@@ -100,7 +100,7 @@ export default createComponent({
     const content = ref('')
     const html = ref('')
     const titleValidation = [ minLength({ min: 5, max: 100 }) ]
-    const tags = ref<string[]>(['javascript', 'programming'])
+    const tags = ref<string[]>([])
     const newTag = ref('')
     const showPreview = ref(true)
 
