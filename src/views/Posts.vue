@@ -6,6 +6,28 @@
 
     <div class="column is-two-thirds">
       <div v-if="article">
+        <div class="columns">
+          <div class="column">
+            <div class="is-pulled-right">
+              <div class="buttons">
+                <div 
+                  v-if="canEdit"
+                  class="button is-rounded is-link"
+                >
+                  <i class="fas fa-edit" />
+                </div>
+
+                <div class="button is-rounded is-success">
+                  <i class="fas fa-share" />
+                </div>
+
+                <div class="button is-rounded is-info">
+                  <i class="far fa-thumbs-up" />
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
         <h1 class="title">
           {{ article.title }}
         </h1>
@@ -28,6 +50,7 @@
 import { createComponent, watch, reactive, ref } from '@vue/composition-api'
 
 import { useArticles } from '@/store/articles'
+import { useUsers } from '@/store/users'
 import { IArticle } from '../types'
 
 export default createComponent({
@@ -37,10 +60,11 @@ export default createComponent({
 
   setup(props, { root }) {
     const articles = useArticles(root.$store)
+    const users = useUsers(root.$store)
     let article = ref<IArticle | undefined>(undefined)
+    let canEdit = ref(false)
 
     watch(() => root.$route.params.id, async (id: string) => {
-      console.log('oid', id)
       if (!id) {
         return
       }
@@ -52,11 +76,15 @@ export default createComponent({
       if (!articles.state.ids.includes(parseInt(id, 10))) {
         // 404
       }
+
       article.value = articles.state.all[id]
+      const currentUser = users.getters.currentUser()
+      canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === articles.state.all[id].id)
     })
 
     return {
-      article
+      article,
+      canEdit,
     }
   },
   
