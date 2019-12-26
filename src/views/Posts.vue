@@ -10,12 +10,13 @@
           <div class="column">
             <div class="is-pulled-right">
               <div class="buttons">
-                <div 
+                <RouterLink 
                   v-if="canEdit"
+                  :to="editLink"
                   class="button is-rounded is-link"
                 >
                   <i class="fas fa-edit" />
-                </div>
+                </RouterLink>
 
                 <div class="button is-rounded is-success">
                   <i class="fas fa-share" />
@@ -32,7 +33,7 @@
           {{ article.title }}
         </h1>
 
-        <div class="post-html" v-html="article.content" />
+        <div class="post-html" v-html="article.markdown" />
       </div>
 
       <div v-else>
@@ -61,6 +62,7 @@ export default createComponent({
   setup(props, { root }) {
     const articles = useArticles(root.$store)
     const users = useUsers(root.$store)
+    const editLink = ref('')
     let article = ref<IArticle | undefined>(undefined)
     let canEdit = ref(false)
 
@@ -80,11 +82,14 @@ export default createComponent({
       article.value = articles.state.all[id]
       const currentUser = users.getters.currentUser()
       canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === articles.state.all[id].id)
+      editLink.value = `/posts/${id}/edit`
     })
+
 
     return {
       article,
       canEdit,
+      editLink,
     }
   },
   

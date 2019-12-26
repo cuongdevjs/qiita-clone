@@ -1,8 +1,8 @@
 import random from 'lodash/random'
 import moment from 'moment'
 
-import data from './article.txt'
-import markdown from './article-plain.txt'
+import data from './article-plain.txt'
+import markdown from './article.txt'
 
 import { IArticle } from '@/types'
 

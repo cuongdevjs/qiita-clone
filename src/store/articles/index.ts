@@ -5,6 +5,7 @@ import { axios } from '@/resources/mockAxios'
 
 import { IArticle, IHashMap } from '@/types'
 import { mockArticles } from '@/resources/mockArticles'
+import { mockUsers } from '@/resources/mockUsers'
 
 class ArticlesState {
   ids: number[] = []

@@ -38,8 +38,6 @@ const validate = (value: string, rules: Rule[], validMessage?: string): Validati
         message: `Value must be between ${rule.min} and ${rule.max}`,
       }
     }
-    if (rule.name === 'format') 
-      console.log(rule.name.match(rule.regexp))
 
     if (rule.name === 'format' && !value.match(rule.regexp)) {
       return {
