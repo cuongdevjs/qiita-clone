@@ -1,31 +1,30 @@
-<p>
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus iaculis eleifend erat, at sollicitudin mauris malesuada sed. Ut lacinia vel nulla nec semper. In vehicula ultrices faucibus. Donec id ligula nunc. Sed dapibus risus non lorem condimentum, scelerisque interdum purus ultricies. Quisque ut felis ac purus auctor suscipit eget eu purus. Sed at velit at mauris tincidunt ornare. Fusce mauris justo, rutrum non pellentesque ac, ornare non neque. Vivamus ut sodales justo. Vestibulum accumsan dui diam, viverra pulvinar diam ullamcorper nec. Phasellus sem est, maximus a commodo in, pellentesque ac quam. Vestibulum dui nisi, dignissim a erat fermentum, rutrum suscipit nunc. Nulla facilisi. Aliquam tellus erat, luctus at posuere a, vulputate quis nisi. Donec eu ligula convallis, tempus nisl vel, venenatis lacus. Phasellus imperdiet ligula leo, non facilisis libero aliquet eget.
-</p> <br />
+<p>In this article we will build a mini blogging platform for software engineers. We will use:</p>
+<ul>
+<li>Vue.js 3 + composition API</li>
+<li>Typescript</li>
+<li><code>vuex-smart-module</code></li>
+</ul>
+<p>It will support authoring articles using markdown, include syntax highlighting via <code>highlight.js</code>.</p>
+<p>A simple sample of the composition API is as follows:</p>
+<pre><code class="language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"handleClick"</span>&gt;</span>
+      Clicky
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Count: </span><span class="hljs-template-variable">{{ count }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 
-<p>
-Aliquam orci arcu, euismod quis efficitur et, vehicula sed elit. Maecenas sem purus, tristique nec interdum hendrerit, egestas sed est. Pellentesque arcu quam, posuere sed quam eu, accumsan rhoncus felis. Integer posuere ligula vitae ipsum luctus pharetra. Phasellus vel porta sapien, nec dignissim sem. Maecenas varius quam est. Sed ultricies egestas nisl, vel scelerisque libero varius et. Mauris neque enim, semper congue arcu eu, luctus convallis neque. Nullam augue urna, euismod ut tristique a, eleifend vel lectus. In nec tortor nisl. Donec mauris sapien, commodo sed enim ut, semper volutpat velit. Maecenas porttitor malesuada vulputate.
-</p> <br />
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ts"</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> { ref, createComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
 
-<p>
-Etiam at nunc arcu. Nunc fringilla ante sit amet diam vehicula, non placerat leo sollicitudin. Ut consectetur hendrerit libero, nec congue sapien pharetra rutrum. Morbi aliquet sem vel enim scelerisque ultricies. Proin odio justo, pretium in dolor vel, vehicula varius eros. Aliquam erat volutpat. Vestibulum blandit, nulla in luctus suscipit, tortor orci ullamcorper velit, vitae malesuada neque orci et velit. Mauris sit amet pulvinar purus, eget tincidunt sem. Vivamus leo sapien, ultricies id purus vel, malesuada molestie quam. Quisque sit amet hendrerit mi, vel accumsan diam. Suspendisse dapibus convallis porttitor. Fusce auctor, est sed tincidunt hendrerit, lorem est eleifend ex, a consequat purus ex quis sapien. Nunc varius metus at justo mollis tristique. Ut dictum egestas molestie.
-</p> <br />
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createComponent({
+  setup() {
+    <span class="hljs-keyword">const</span> count = ref(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> count.value += <span class="hljs-number">1</span>
 
-<p>
-Aliquam feugiat libero augue, vel rhoncus justo porttitor nec. Morbi hendrerit semper lectus, at tincidunt mi rhoncus vel. Vivamus feugiat erat libero, condimentum ultrices ante imperdiet nec. Phasellus in est id elit rutrum ornare ac id dui. Morbi nec pretium urna, eget commodo lacus. Vestibulum dictum tellus sit amet elit commodo blandit in ut quam. Maecenas eget risus semper, aliquet nisi a, rutrum ipsum. Suspendisse ac quam quis nibh maximus finibus.
-</p> <br />
-
-<p>
-In hac habitasse platea dictumst. Etiam bibendum orci sed hendrerit fringilla. In egestas pulvinar hendrerit. Nunc ullamcorper varius felis, ut dignissim nibh tincidunt et. Curabitur id odio quam. Ut pellentesque nibh id sem rhoncus, a imperdiet neque accumsan. Phasellus et sapien sit amet elit tristique aliquam. Vivamus rutrum nisl id ante volutpat vehicula. Curabitur sed erat elementum urna lacinia interdum bibendum a arcu. 
-</p> <br />
-
-<p>
- Fusce tempor libero quis nunc porta sagittis nec eget elit. Etiam a lorem orci. Nullam congue egestas metus, at euismod velit ultrices vel. Sed venenatis eget lorem eu porta. Sed ultricies consequat diam a maximus. Integer egestas placerat ipsum. Aenean molestie risus id risus euismod porta. Sed rhoncus scelerisque odio, rhoncus accumsan turpis pretium eu. Pellentesque eu neque a turpis ullamcorper interdum eu ultricies arcu. Sed pharetra laoreet pretium. Aenean porttitor nulla nec eros finibus venenatis et et neque. Maecenas viverra nunc lectus, ut eleifend mi condimentum pretium. Vestibulum ipsum ligula, pellentesque eget convallis eu, porta rutrum ante. 
-</p> <br />
-
-<p>
- Maecenas interdum urna lectus, vitae ornare justo iaculis eget. Nunc ac vehicula odio, et venenatis velit. Nulla a sapien at enim sodales facilisis. Aenean lacinia hendrerit purus, sit amet commodo magna. Integer ut ornare ligula, tempus dignissim ante. Cras dictum egestas sodales. Phasellus non imperdiet nunc. Suspendisse potenti. Sed pulvinar augue vitae imperdiet porttitor. Donec at urna malesuada, placerat justo at, egestas enim. Nullam at tellus eu eros efficitur rhoncus vitae nec purus. Sed mattis tristique vulputate. Duis tempus ante et orci blandit, vitae eleifend ante mattis. Maecenas vestibulum et orci at faucibus. Quisque aliquet gravida metus, eu gravida dolor efficitur non. Donec sollicitudin volutpat mollis. 
-</p> <br />
-
-<p>
- Praesent ac metus eu libero tempor ultricies at nec augue. Aliquam sit amet nisl vitae massa aliquam blandit sed in lorem. Duis non nulla lectus. Vestibulum at arcu dictum, cursus tortor non, rutrum eros. Proin et augue in leo placerat feugiat ac eget sem. Phasellus cursus urna justo, et lobortis leo dignissim at. Quisque dictum, ante sit amet tristique vehicula, neque metus tempor turpis, eu tristique ipsum lectus vel lacus. Praesent cursus egestas elit, vel malesuada mauris porttitor vitae. Nullam ac sollicitudin risus. Donec faucibus facilisis pellentesque. Nunc magna nisi, rutrum id enim eu, auctor convallis justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut sodales purus sit amet urna venenatis, ac mattis risus varius. Nam facilisis tempus ex, nec imperdiet nisl euismod ac. Suspendisse potenti. 
-</p> <br />
+    <span class="hljs-keyword">return</span> { count, handleClick }
+  }
+})
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre>
+<p>Simple as that!</p>

@@ -1,0 +1,39 @@
+# Intro
+
+In this article we will build a mini blogging platform for software engineers. We will use:
+
+- Vue.js 3 + composition API
+- Typescript
+- `vuex-smart-module`
+
+It will support authoring articles using markdown, include syntax highlighting via `highlight.js`. 
+
+## Content
+
+A simple sample of the composition API is as follows: 
+
+```html
+<template>
+  <div>
+    <button @click="handleClick">
+      Clicky
+    </button>
+    <div>Count: {{ count }}</div>
+  </div>
+</template>
+
+<script lang="ts">
+import { ref, createComponent } from 'vue'
+
+export default createComponent({
+  setup() {
+    const count = ref(0)
+    const handleClick = () => count.value += 1
+
+    return { count, handleClick }
+  }
+})
+</script>
+```
+
+Simple as that!

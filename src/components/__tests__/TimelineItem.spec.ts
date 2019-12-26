@@ -26,6 +26,7 @@ describe('TimelineItem', () => {
       id: 1,
       title: 'My article',
       content: 'Content',
+      markdown: '',
       created: moment(),
       authorId: 1,
       likes: 10,
@@ -50,6 +51,7 @@ describe('TimelineItem', () => {
       title: 'My article',
       content: 'Content',
       created: moment(),
+      markdown: '',
       authorId: 1,
       likes: 10,
     }

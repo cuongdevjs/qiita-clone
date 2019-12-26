@@ -1,7 +1,7 @@
 <template>
   <span 
     id="profile-control"
-    @click="showProfile = true"
+    @click="showProfile = !showProfile"
   >
     <a
       class="button is-info"
@@ -11,8 +11,24 @@
         src="https://curatti.com/wp-content/uploads/2017/05/generic-avatar-image1.png"
       />
     </a>
-    <div class="profile__dropdown">
-      Blah blah blah
+    <div 
+      v-show="showProfile"
+      class="profile__dropdown"
+    >
+      <aside class="menu">
+      <ul class="menu-list">
+        <li>
+          <a>Posts</a>
+        </li>
+        <li>
+          <a>Edit Requests</a>
+        </li>
+
+        <li>
+          <a @click="handleLogout">Logout</a>
+        </li>
+      </ul>
+      </aside>
     </div>
   </span>
 </template>
@@ -25,9 +41,11 @@ import { useUsers } from '@/store/users'
 export default createComponent({
   setup(props, ctx) {
     const showProfile = ref(false)
+    const handleLogout = () => ctx.emit('logout')
 
     return {
       showProfile,
+      handleLogout,
     }
   }
 })
@@ -39,10 +57,12 @@ export default createComponent({
 }
 
 .profile__dropdown {
+  padding: 8px;
   position: absolute;
   width: 150px;
-  right: 0px;
+  right: 8px;
   border: 1px solid;
+  z-index: 50;
   border-color: #dbdbdb;
 }
 </style>

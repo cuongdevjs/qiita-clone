@@ -2,6 +2,7 @@ import random from 'lodash/random'
 import moment from 'moment'
 
 import data from './article.txt'
+import markdown from './article-plain.txt'
 
 import { IArticle } from '@/types'
 
@@ -10,9 +11,10 @@ const mockArticles: IArticle[] = [
     id: 1,
     title: 'Hacking with Vue and TypeScript',
     content: data,
-    created: moment().subtract(random(0, 10), 'days'),
+    markdown,
+    created: moment(),
     likes: random(0, 100),
-    authorId: random(1, 2),
+    authorId: 1,
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 5,
@@ -37,6 +41,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 6,
@@ -45,6 +50,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 7,
@@ -53,6 +59,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 8,
@@ -61,6 +68,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 9,
@@ -69,6 +77,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
   {
     id: 10,
@@ -77,6 +86,7 @@ const mockArticles: IArticle[] = [
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
     authorId: random(1, 2),
+    markdown: '',
   },
 ]
 

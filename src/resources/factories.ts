@@ -5,6 +5,7 @@ import { IArticle } from '@/types'
 const article: IArticle = {
   id: 1,
   title: 'Today',
+  markdown: '',
   content: '',
   created: moment(),
   likes: 1,

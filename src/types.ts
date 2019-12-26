@@ -8,6 +8,7 @@ export interface IArticle {
   id: number
   title: string
   content: string
+  markdown: string
   created: Moment
   authorId: number
   likes: number

@@ -43,15 +43,10 @@
               Log in
             </RouterLink>
 
-            <a
-              v-if="authenticated"
-              class="button is-light"
-              @click="handleLogout"
-            >
-              Log out
-            </a>
-
-            <Profile v-if="authenticated" />
+            <Profile 
+              v-if="authenticated" 
+              @logout="handleLogout"
+            />
           </div>
         </div>
       </div>

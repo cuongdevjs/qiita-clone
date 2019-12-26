@@ -10,7 +10,7 @@
           {{ article.title }}
         </h1>
 
-        <div v-html="article.content" />
+        <div class="post-html" v-html="article.content" />
       </div>
 
       <div v-else>
@@ -65,3 +65,8 @@ export default createComponent({
   }
 })
 </script>
+
+
+<style lang="scss">
+@import '../components/markdown-style.scss';
+</style>
