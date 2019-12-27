@@ -38,7 +38,7 @@
         @hide="showShareModal = false"
       >
         <SignUp @signup="handleSignup">
-          <template v-slot:buttons>
+          <template v-slot:extraButtons>
             <div class="control">
               <button 
                 type="button" 
@@ -46,14 +46,6 @@
                 @click="showShareModal = false"
               >
                 Cancel
-              </button>
-            </div>
-            <div class="control">
-              <button 
-                type="submit" 
-                class="button is-primary"
-              >
-                Submit
               </button>
             </div>
           </template> 

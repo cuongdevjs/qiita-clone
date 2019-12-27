@@ -32,6 +32,7 @@
       />
 
       <div class="field is-grouped is-grouped-right">
+        <slot name="extraButtons" />
         <button 
           :disabled="!formValid"
           type="submit" 
