@@ -3,32 +3,32 @@
     <form @submit.prevent="handleSubmit">
       <ValidatorInput 
         v-model="username"
-        @validate="handleValidate"
         name="username"
         type="text"
         label="Username"
-        :validation="usernameValidation"
         placeholder="Username"
+        :validation="usernameValidation"
+        @validate="handleValidate"
       />
 
       <ValidatorInput 
         v-model="email"
         type="text"
-        @validate="handleValidate"
         name="email"
         label="Email"
-        :validation="emailValidation"
         placeholder="Email"
+        :validation="emailValidation"
+        @validate="handleValidate"
       />
 
       <ValidatorInput 
         v-model="password"
         type="password"
-        @validate="handleValidate"
         name="password"
+        placeholder="Password"
         label="Password"
         :validation="usernameValidation"
-        placeholder="Password"
+        @validate="handleValidate"
       />
 
       <div class="field is-grouped is-grouped-right">
@@ -54,8 +54,6 @@ import ValidatorInput from '@/components/ValidatorInput/ValidatorInput.vue'
 
 export default createComponent({
   name: 'SignUp',
-
-  props: {},
 
   components: {
     ValidatorInput,
@@ -103,9 +101,9 @@ export default createComponent({
     }
 
     return {
-      username: username.value,    
-      password: password.value,    
-      email: email.value,
+      username,
+      password,
+      email,
       usernameValidation,
       emailValidation,
       passwordValidation: usernameValidation,
