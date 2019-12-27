@@ -2,7 +2,7 @@ import { Store } from 'vuex'
 import { Module, Getters, Actions, Mutations } from 'vuex-smart-module'
 
 import { IUser, IHashMap } from '@/types'
-import { LoginUser } from '@/components/Login/types'
+import { LoginUser } from '@/components/LoginForm/types'
 import { mockUsers } from '@/resources/mockUsers'
 import { delay } from '../utils'
 import { axios } from '@/resources/mockAxios'

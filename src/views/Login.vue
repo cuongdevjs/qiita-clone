@@ -1,21 +1,21 @@
 <template>
   <div>
-    <Login @login="handleSubmit" />
+    <LoginForm @login="handleSubmit" />
   </div>  
 </template>
 
 <script lang="ts">
 import { createComponent, ref, watch } from '@vue/composition-api'
 
-import Login from '@/components/Login/Login.vue'
-import { LoginUser } from '@/components/Login/types'
+import LoginForm from '@/components/LoginForm/LoginForm.vue'
+import { LoginUser } from '@/components/LoginForm/types'
 import { useUsers } from '@/store/users/'
 
 export default createComponent({
-  name: 'LoginView',
+  name: 'Login',
 
   components: {
-    Login,
+    LoginForm,
   },
 
   setup(props, ctx) {

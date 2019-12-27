@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import Posts from '../views/Posts.vue'
-import LoginView from '../views/LoginView.vue'
+import Login from '../views/Login.vue'
 import NewPost from '../views/NewPost.vue'
 import EditPost from '../views/EditPost.vue'
 import NewUser from '../views/NewUser.vue'
@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/users/login',
     name: 'login',
-    component: LoginView,
+    component: Login,
   },
 ]
 

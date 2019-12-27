@@ -80,9 +80,9 @@
 import { createComponent, ref, watch, onMounted } from '@vue/composition-api'
 import marked from 'marked'
 
-import Tags from '@/components/Tags.vue'
-import ValidatorInput from '@/components/ValidatorInput.vue'
-import { minLength } from '@/components/validation'
+import Tags from './Tags.vue'
+import ValidatorInput from '@/components/ValidatorInput/ValidatorInput.vue'
+import { minLength } from '@/components/ValidatorInput/validation'
 import { options } from '@/markedOptions'
 import { IArticle } from '@/types'
 

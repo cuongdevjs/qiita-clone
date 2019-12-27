@@ -24,7 +24,7 @@
 import Vue from 'vue'
 import { createComponent, ref, reactive } from '@vue/composition-api'
 
-import { Rule, validate } from '@/components/validation'
+import { Rule, validate } from './validation'
 
 export default createComponent({
   name: 'ValidatorInput',

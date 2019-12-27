@@ -66,9 +66,9 @@
 import { createComponent, computed, ref, reactive, toRefs } from '@vue/composition-api'
 
 import SignUp from '@/components/SignUp/SignUp.vue'
-import Modal from '@/components/Modal/index.vue'
+import Modal from '@/components/Modal/Modal.vue'
 import { NewUser } from '../SignUp/types'
-import TimelineItem from '@/components/TimelineItem.vue'
+import TimelineItem from './TimelineItem.vue'
 import { useArticles } from '@/store/articles'
 import { IArticle } from '../../types'
 import { Period } from './types'
