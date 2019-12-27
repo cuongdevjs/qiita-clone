@@ -25,7 +25,7 @@ class PostsMutations extends Mutations<PostsState> {
     this.state.loading = false    
   }
 
-  ADD_ARTICLE(post: Post) {
+  ADD_POST(post: Post) {
     this.state.all = { 
       ...this.state.all,
       [post.id]: post
@@ -33,7 +33,7 @@ class PostsMutations extends Mutations<PostsState> {
     this.state.ids.push(post.id)
   }
 
-  SET_ARTICLES(payload: Post[]) {
+  SET_POSTS(payload: Post[]) {
     const all: HashMap<Post> = {}
     const ids: number[] = []
 
@@ -64,7 +64,7 @@ class PostsActions extends Actions<
     return new Promise(resolve => {
       setTimeout(async () => {
         await axios.get<Post[]>('/posts')
-        this.commit('SET_ARTICLES', mockPosts)
+        this.commit('SET_POSTS', mockPosts)
         this.commit('SUCCESS', {})
         resolve()
       }, random(500, 2000))
@@ -76,7 +76,7 @@ class PostsActions extends Actions<
     return new Promise(resolve => {
       setTimeout(async () => {
         await axios.get<Post>(`/posts/${id}`)
-        this.commit('ADD_ARTICLE', mockPosts[0])
+        this.commit('ADD_POST', mockPosts[0])
         this.commit('SUCCESS', {})
         resolve()
       }, random(500, 2000))
@@ -87,7 +87,7 @@ class PostsActions extends Actions<
     return new Promise(resolve => {
       setTimeout(async () => {
         await axios.post<Post>('/posts', { post })
-        this.commit('ADD_ARTICLE', { 
+        this.commit('ADD_POST', { 
           ...post,
           id: 100,
           authorId: 1,
