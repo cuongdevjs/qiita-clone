@@ -9,6 +9,7 @@
     >
       {{ tag }}
       <button 
+        data-test-remove-tag
         class="delete is-small" 
         @click="() => handleDelete(tag)"
       />

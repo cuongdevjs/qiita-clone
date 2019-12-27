@@ -31,6 +31,7 @@
 
       <div class="column">
         <button 
+          data-test-preview
           type="submit" 
           class="button is-info is-light is-small is-pulled-right"
           @click="showPreview = !showPreview"
