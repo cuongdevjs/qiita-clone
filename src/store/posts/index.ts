@@ -1,12 +1,11 @@
 import { Store } from 'vuex'
 import { Mutations, Module, createMapper, Actions, Getters } from 'vuex-smart-module'
-import random from 'lodash/random'
-import { axios } from '@/resources/mockAxios'
+import moment from 'moment'
 
+import { axios } from '@/resources/mockAxios'
+import { delay } from '@/store/utils'
 import { Post, HashMap } from '@/types'
 import { mockPosts } from '@/resources/mockPosts'
-import { mockUsers } from '@/resources/mockUsers'
-import moment from 'moment'
 
 class PostsState {
   ids: number[] = []
@@ -61,40 +60,28 @@ class PostsActions extends Actions<
   > {
   async fetchAll() {
     this.commit('REQUEST', {})
-    return new Promise(resolve => {
-      setTimeout(async () => {
-        await axios.get<Post[]>('/posts')
-        this.commit('SET_POSTS', mockPosts)
-        this.commit('SUCCESS', {})
-        resolve()
-      }, random(500, 2000))
-    })
+    await axios.get<Post[]>('/posts')
+    await delay()
+    this.commit('SET_POSTS', mockPosts)
+    this.commit('SUCCESS', {})
   }
 
   async fetchById(id: string) {
     this.commit('REQUEST', {})
-    return new Promise(resolve => {
-      setTimeout(async () => {
-        await axios.get<Post>(`/posts/${id}`)
-        this.commit('ADD_POST', mockPosts[0])
-        this.commit('SUCCESS', {})
-        resolve()
-      }, random(500, 2000))
-    })
+    await axios.get<Post>(`/posts/${id}`)
+    await delay()
+    this.commit('ADD_POST', mockPosts[0])
+    this.commit('SUCCESS', {})
   }
 
   async createPost(post: Post) {
-    return new Promise(resolve => {
-      setTimeout(async () => {
-        await axios.post<Post>('/posts', { post })
-        this.commit('ADD_POST', { 
-          ...post,
-          id: 100,
-          authorId: 1,
-          created: moment(),
-        })
-        resolve()
-      }, random(500, 2000))
+    await axios.post<Post>('/posts', { post })
+    await delay()
+    this.commit('ADD_POST', {
+      ...post,
+      id: 100,
+      authorId: 1,
+      created: moment(),
     })
   }
 }
