@@ -45,7 +45,7 @@
         <div 
           id="markdown"
           contenteditable
-          @keyup="handleEdit"
+          @input="handleEdit"
         />
       </div>
       <div 
@@ -86,6 +86,8 @@ import { minLength } from '@/components/validation'
 import { options } from '@/markedOptions'
 import { IArticle } from '@/types'
 
+let editableDiv: HTMLDivElement | null = null
+
 export default createComponent({
   name: 'PostWriter',
 
@@ -111,13 +113,20 @@ export default createComponent({
     const showPreview = ref(true)
 
     onMounted(() => {
-      // @ts-ignore
-      ctx.root.$el.querySelector('#markdown')!.innerText = props.post.content
+      const div = ctx.root.$el.querySelector<HTMLDivElement>('#markdown')
+      if (!div) {
+        throw Error('Content Editiable not found')
+      }
+
+      editableDiv = div
+      div.innerText = props.post.content
     })
 
     const handleEdit = (e: any) => {
-      // @ts-ignore
-      content.value = ctx.root.$el.querySelector('#markdown')!.innerText
+      if (!editableDiv) {
+        return
+      }
+      content.value = editableDiv.innerText
     }
 
     watch(() => content.value, (val) => {
@@ -172,6 +181,9 @@ export default createComponent({
 
 #markdown {
   white-space: pre-wrap;
+  border: 1px solid #dbdbdb;
+  padding: calc(0.75em - 1px);
+  border-radius: 4px;
 }
 
 #rendered-markdown {
