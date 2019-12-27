@@ -69,7 +69,10 @@
             Save Draft
           </div>
 
-          <div class="button is-primary">
+          <div 
+            class="button is-primary"
+            @click="handleCreatePost"
+          >
             Post
           </div>
         </div>
@@ -87,6 +90,7 @@ import ValidatorInput from '../ValidatorInput/ValidatorInput.vue'
 import { minLength } from '../ValidatorInput/validation'
 import { options } from '../../markedOptions'
 import { IArticle } from '../../types'
+import moment from 'moment'
 
 let editableDiv: HTMLDivElement | null = null
 
@@ -124,13 +128,6 @@ export default createComponent({
       div.innerText = props.post.content
     })
 
-    const handleEdit = (e: any) => {
-      if (!editableDiv) {
-        return
-      }
-      content.value = editableDiv.innerText
-    }
-
     watch(() => content.value, (val) => {
       marked(content.value, options, (err, res) => {
         if (err) {
@@ -140,6 +137,13 @@ export default createComponent({
       })
     })
 
+    const handleEdit = (e: any) => {
+      if (!editableDiv) {
+        return
+      }
+      content.value = editableDiv.innerText
+    }
+
     const handleAddTag = () => {
       if (tags.value.includes(newTag.value)) {
         return
@@ -148,6 +152,18 @@ export default createComponent({
       tags.value.push(newTag.value)
       newTag.value = ''
     }
+
+    const handleCreatePost = () => {
+      const newArticle: IArticle = {
+        ...props.post,
+        title: title.value,
+        content: content.value,
+        markdown: html.value,
+        tags: tags.value,
+      }
+      ctx.emit('submitted', newArticle)
+    }
+
     const handleRemoveTag = (tag: string) => tags.value = tags.value.filter(x => x !== tag)
 
     return {
@@ -159,6 +175,7 @@ export default createComponent({
       showPreview,
       handleEdit,
       handleAddTag,
+      handleCreatePost,
       handleRemoveTag,
       titleValidation,
     }

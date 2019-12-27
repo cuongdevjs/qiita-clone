@@ -81,7 +81,10 @@ export default createComponent({
     const articles = useArticles(ctx.root.$store)
     const tabs = ref<Period>(['Today', 'This Week', 'This Month'])
     const currentPeriod = ref<Period>('Today')
-    articles.actions.fetchAll()
+
+    if (!articles.state.touched) {
+      articles.actions.fetchAll()
+    }
 
     const showShareModal = ref(false)
 

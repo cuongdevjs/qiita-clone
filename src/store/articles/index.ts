@@ -6,6 +6,7 @@ import { axios } from '@/resources/mockAxios'
 import { IArticle, IHashMap } from '@/types'
 import { mockArticles } from '@/resources/mockArticles'
 import { mockUsers } from '@/resources/mockUsers'
+import moment from 'moment'
 
 class ArticlesState {
   ids: number[] = []
@@ -22,6 +23,14 @@ class ArticlesMutations extends Mutations<ArticlesState> {
 
   SUCCESS(payload = {}) {
     this.state.loading = false    
+  }
+
+  ADD_ARTICLE(article: IArticle) {
+    this.state.all = { 
+      ...this.state.all,
+      [article.id]: article
+    }
+    this.state.ids.push(article.id)
   }
 
   SET_ARTICLES(payload: IArticle[]) {
@@ -67,8 +76,23 @@ class ArticlesActions extends Actions<
     return new Promise(resolve => {
       setTimeout(async () => {
         await axios.get<IArticle>(`/articles/${id}`)
-        this.commit('SET_ARTICLES', [mockArticles[0]])
+        this.commit('ADD_ARTICLE', mockArticles[0])
         this.commit('SUCCESS', {})
+        resolve()
+      }, random(500, 2000))
+    })
+  }
+
+  async createPost(article: IArticle) {
+    return new Promise(resolve => {
+      setTimeout(async () => {
+        await axios.post<IArticle>('/articles', { article })
+        this.commit('ADD_ARTICLE', { 
+          ...article,
+          id: 100,
+          authorId: 1,
+          created: moment(),
+        })
         resolve()
       }, random(500, 2000))
     })

@@ -81,7 +81,7 @@ export default createComponent({
 
       article.value = articles.state.all[id]
       const currentUser = users.getters.currentUser()
-      canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === articles.state.all[id].id)
+      canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === articles.state.all[id].authorId)
       editLink.value = `/posts/${id}/edit`
     })
 
