@@ -3,12 +3,12 @@ import CompositionApi from '@vue/composition-api'
 import { mount } from '@vue/test-utils'
 
 import { createLocalVue } from '@/components/testHelper'
-import { article } from '@/resources/factories'
+import { post } from '@/resources/factories'
 
 let mockLoading = true
 let mockTouched = true
 
-jest.mock('../../../resources/article.txt', () => '')
+jest.mock('../../../resources/post.txt', () => '')
 
 jest.mock('@/store/users', () => ({
   useUsers: () => ({
@@ -18,8 +18,8 @@ jest.mock('@/store/users', () => ({
   })
 }))
 
-jest.mock('@/store/articles', () => ({
-  useArticles: () => ({
+jest.mock('@/store/posts', () => ({
+  usePosts: () => ({
     state: {
       loading: mockLoading,
       touched: mockTouched,
@@ -28,9 +28,9 @@ jest.mock('@/store/articles', () => ({
       fetchAll: () => Promise.resolve()
     },
     getters: {
-      articles: [
-        { ...article, id: 1 },
-        { ...article, id: 2 }
+      posts: [
+        { ...post, id: 1 },
+        { ...post, id: 2 }
       ]
     }
   })
@@ -46,7 +46,7 @@ import TimelineItem from '../TimelineItem.vue'
 
 
 describe('Timeline', () => {
-  it('renders Loading when articles are not loaded', async () => {
+  it('renders Loading when posts are not loaded', async () => {
     mockLoading = true
     const wrapper = mount(Timeline, {
       localVue: createLocalVue(),
@@ -58,7 +58,7 @@ describe('Timeline', () => {
     expect(wrapper.find('[data-test-loading]').exists()).toBe(true)
   })
 
-  it('renders when articles when loaded', async () => {
+  it('renders when posts when loaded', async () => {
     mockLoading = false
     const wrapper = mount(Timeline, {
       localVue: createLocalVue(),

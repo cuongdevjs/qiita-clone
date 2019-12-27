@@ -1,7 +1,7 @@
 import { Store } from 'vuex'
 import { Module, Getters, Actions, Mutations } from 'vuex-smart-module'
 
-import { IUser, IHashMap } from '@/types'
+import { User, HashMap } from '@/types'
 import { LoginUser } from '@/components/LoginForm/types'
 import { mockUsers } from '@/resources/mockUsers'
 import { delay } from '../utils'
@@ -10,7 +10,7 @@ import { axios } from '@/resources/mockAxios'
 
 class UsersState {
   ids: number[] = [1, 2]
-  all: IHashMap<IUser> = {
+  all: HashMap<User> = {
     1: mockUsers[0],
     2: mockUsers[1],
   }
@@ -34,7 +34,7 @@ class UserGetters extends Getters<UsersState> {
 }
 
 class UsersMutations extends Mutations<UsersState> {
-  LOGOUT_CURRENT_USER(payload: IUser) {
+  LOGOUT_CURRENT_USER(payload: User) {
     this.state.authenticated = false
     this.state.all[payload.id] = {
       ...this.state.all[payload.id],
@@ -42,7 +42,7 @@ class UsersMutations extends Mutations<UsersState> {
     }
   }
 
-  SET_CURRENT_USER(payload: IUser) {
+  SET_CURRENT_USER(payload: User) {
     this.state.authenticated = true
     this.state.all[payload.id] = {
       ...this.state.all[payload.id],
@@ -74,7 +74,7 @@ class UsersActions extends Actions<
     this.commit('SET_CURRENT_USER', mockUsers[0])
   }
 
-  async signup(user: IUser): Promise<void> {
+  async signup(user: User): Promise<void> {
     await delay()
     await axios.post('/users/signup', user)
     this.commit('SET_CURRENT_USER', mockUsers[0])

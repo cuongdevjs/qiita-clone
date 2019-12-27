@@ -1,10 +1,10 @@
 import { Moment } from 'moment'
 
-export interface IHashMap<T> {
+export interface HashMap<T> {
   [key: string]: T
 }
 
-export interface IArticle {
+export interface Post {
   id: number
   title: string
   content: string
@@ -16,7 +16,7 @@ export interface IArticle {
 
 }
 
-export interface IUser {
+export interface User {
   id: number
   username: string
   profile: string

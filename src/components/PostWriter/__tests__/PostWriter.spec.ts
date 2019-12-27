@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 
 import { createLocalVue } from '@/components/testHelper'
 import PostWriter from '../PostWriter.vue'
-import { article } from '@/resources/factories'
+import { post } from '@/resources/factories'
 
 describe('PostWriter', () => {
   it('adds new tags', async () => {
@@ -10,7 +10,7 @@ describe('PostWriter', () => {
       localVue: createLocalVue(),
       propsData: {
         post: {
-          ...article,
+          ...post,
           tags: []
         }
       }
@@ -31,7 +31,7 @@ describe('PostWriter', () => {
       localVue: createLocalVue(),
       propsData: {
         post: {
-          ...article,
+          ...post,
           tags: ['tag 1']
         }
       }
@@ -49,7 +49,7 @@ describe('PostWriter', () => {
       localVue: createLocalVue(),
       propsData: {
         post: {
-          ...article,
+          ...post,
         }
       }
     })
@@ -66,7 +66,7 @@ describe('PostWriter', () => {
       localVue: createLocalVue(),
       propsData: {
         post: {
-          ...article,
+          ...post,
         }
       }
     })

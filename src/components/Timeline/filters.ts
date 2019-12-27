@@ -1,22 +1,22 @@
-import { IArticle } from '@/types';
+import { Post } from '@/types';
 import { Period } from './types';
 import moment from 'moment';
 
-const filterByPeriod = (period: Period, articles: IArticle[]): IArticle[] => {
+const filterByPeriod = (period: Period, posts: Post[]): Post[] => {
   if (period === 'Today') {
-    return articles.filter(
+    return posts.filter(
       x => x.created.isSameOrAfter(moment().subtract(1, 'days'))
     )
   }
 
   if (period === 'This Week') {
-    return articles.filter(
+    return posts.filter(
       x => x.created.isSameOrAfter(moment().subtract(7, 'days'))
     )
   }
 
   if (period === 'This Month') {
-    return articles.filter(
+    return posts.filter(
       x => x.created.isSameOrAfter(moment().subtract(1, 'month'))
     )
   }

@@ -1,12 +1,12 @@
 # Intro
 
-In this article we will build a mini blogging platform for software engineers. We will use:
+In this post we will build a mini blogging platform for software engineers. We will use:
 
 - Vue.js 3 + composition API
 - Typescript
 - `vuex-smart-module`
 
-It will support authoring articles using markdown, include syntax highlighting via `highlight.js`. 
+It will support authoring posts using markdown, include syntax highlighting via `highlight.js`. 
 
 ## Content
 

@@ -12,8 +12,8 @@
 import { createComponent, ref, watch } from '@vue/composition-api'
 
 import PostWriter from '@/components/PostWriter/PostWriter.vue'
-import { IArticle } from '../types'
-import { useArticles } from '@/store/articles'
+import { Post } from '../types'
+import { usePosts } from '@/store/posts'
 import moment from 'moment'
 
 export default createComponent({
@@ -24,15 +24,15 @@ export default createComponent({
   },
 
   setup(props, { root }) {
-    const articles = useArticles(root.$store)
+    const posts = usePosts(root.$store)
     const id = root.$route.params.id
-    const post = ref<IArticle | undefined>()
+    const post = ref<Post | undefined>()
 
-    if (!articles.state.all[id]) {
-      articles.actions.fetchById(root.$route.params.id)
+    if (!posts.state.all[id]) {
+      posts.actions.fetchById(root.$route.params.id)
     }
 
-    watch(() => articles.state.all[root.$route.params.id], thePost => {
+    watch(() => posts.state.all[root.$route.params.id], thePost => {
       if (thePost) {
         post.value = thePost
       }

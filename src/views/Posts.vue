@@ -5,7 +5,7 @@
     </div>
 
     <div class="column is-two-thirds">
-      <div v-if="article">
+      <div v-if="post">
         <div class="columns">
           <div class="column">
             <div class="is-pulled-right">
@@ -30,10 +30,10 @@
           </div>
         </div>
         <h1 class="title">
-          {{ article.title }}
+          {{ post.title }}
         </h1>
 
-        <div class="post-html" v-html="article.markdown" />
+        <div class="post-html" v-html="post.markdown" />
       </div>
 
       <div v-else>
@@ -50,9 +50,9 @@
 <script lang="ts">
 import { createComponent, watch, reactive, ref } from '@vue/composition-api'
 
-import { useArticles } from '@/store/articles'
+import { usePosts } from '@/store/posts'
 import { useUsers } from '@/store/users'
-import { IArticle } from '../types'
+import { Post } from '../types'
 
 export default createComponent({
   name: 'Posts',
@@ -60,10 +60,10 @@ export default createComponent({
   props: {},
 
   setup(props, { root }) {
-    const articles = useArticles(root.$store)
+    const posts = usePosts(root.$store)
     const users = useUsers(root.$store)
     const editLink = ref('')
-    let article = ref<IArticle | undefined>(undefined)
+    let post = ref<Post | undefined>(undefined)
     let canEdit = ref(false)
 
     watch(() => root.$route.params.id, async (id: string) => {
@@ -71,23 +71,23 @@ export default createComponent({
         return
       }
 
-      if (!articles.state.touched) {
-        await articles.actions.fetchById(id)
+      if (!posts.state.touched) {
+        await posts.actions.fetchById(id)
       }
 
-      if (!articles.state.ids.includes(parseInt(id, 10))) {
+      if (!posts.state.ids.includes(parseInt(id, 10))) {
         // 404
       }
 
-      article.value = articles.state.all[id]
+      post.value = posts.state.all[id]
       const currentUser = users.getters.currentUser()
-      canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === articles.state.all[id].authorId)
+      canEdit.value = !!(users.state.authenticated && currentUser && currentUser.id === posts.state.all[id].authorId)
       editLink.value = `/posts/${id}/edit`
     })
 
 
     return {
-      article,
+      post,
       canEdit,
       editLink,
     }

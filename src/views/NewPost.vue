@@ -9,8 +9,8 @@
 import { createComponent, ref, watch } from '@vue/composition-api'
 
 import PostWriter from '@/components/PostWriter/PostWriter.vue'
-import { IArticle } from '../types'
-import { useArticles } from '@/store/articles'
+import { Post } from '../types'
+import { usePosts } from '@/store/posts'
 import moment from 'moment'
 
 export default createComponent({
@@ -21,7 +21,7 @@ export default createComponent({
   },
 
   setup(props, ctx) {
-    const newPost: IArticle = {
+    const newPost: Post = {
       id: 0,
       title: '',
       content: '',
@@ -32,10 +32,10 @@ export default createComponent({
       likes: 0,
     }
 
-    const articles = useArticles(ctx.root.$store)
+    const posts = usePosts(ctx.root.$store)
 
-    const handleCreate = async (post: IArticle) => {
-      await articles.actions.createPost(post)
+    const handleCreate = async (post: Post) => {
+      await posts.actions.createPost(post)
       ctx.root.$router.push('/')
     }
 

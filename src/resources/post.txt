@@ -1,10 +1,10 @@
-<p>In this article we will build a mini blogging platform for software engineers. We will use:</p>
+<p>In this post we will build a mini blogging platform for software engineers. We will use:</p>
 <ul>
 <li>Vue.js 3 + composition API</li>
 <li>Typescript</li>
 <li><code>vuex-smart-module</code></li>
 </ul>
-<p>It will support authoring articles using markdown, include syntax highlighting via <code>highlight.js</code>.</p>
+<p>It will support authoring posts using markdown, include syntax highlighting via <code>highlight.js</code>.</p>
 <p>A simple sample of the composition API is as follows:</p>
 <pre><code class="language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>

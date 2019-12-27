@@ -89,7 +89,7 @@ import Tags from './Tags.vue'
 import ValidatorInput from '../ValidatorInput/ValidatorInput.vue'
 import { minLength } from '../ValidatorInput/validation'
 import { options } from '../../markedOptions'
-import { IArticle } from '../../types'
+import { Post } from '../../types'
 import moment from 'moment'
 
 let editableDiv: HTMLDivElement | null = null
@@ -104,7 +104,7 @@ export default createComponent({
 
   props: {
     post: {
-      type: Object as () => IArticle,
+      type: Object as () => Post,
       required: true,
     },
   },
@@ -154,14 +154,14 @@ export default createComponent({
     }
 
     const handleCreatePost = () => {
-      const newArticle: IArticle = {
+      const newPost: Post = {
         ...props.post,
         title: title.value,
         content: content.value,
         markdown: html.value,
         tags: tags.value,
       }
-      ctx.emit('submitted', newArticle)
+      ctx.emit('submitted', newPost)
     }
 
     const handleRemoveTag = (tag: string) => tags.value = tags.value.filter(x => x !== tag)

@@ -1,8 +1,8 @@
 import moment from 'moment'
 
-import { IArticle } from '@/types'
+import { Post } from '@/types'
 
-const article: IArticle = {
+const post: Post = {
   id: 1,
   title: 'Today',
   markdown: '',
@@ -14,5 +14,5 @@ const article: IArticle = {
 }
 
 export {
-  article
+  post
 }

@@ -1,6 +1,6 @@
-import { IUser } from '@/types'
+import { User } from '@/types'
 
-const mockUsers: IUser[] = [
+const mockUsers: User[] = [
   {
     id: 1,
     username: 'Lachlan',

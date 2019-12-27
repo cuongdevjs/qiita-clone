@@ -25,9 +25,9 @@
         </a>
       </p>
       <TimelineItem
-        v-for="article in articles" 
-        :key="article.id"
-        :article="article"
+        v-for="post in posts" 
+        :key="post.id"
+        :post="post"
         @like="handleLike"
       />
     </span>
@@ -63,8 +63,8 @@ import SignUp from '@/components/SignUp/SignUp.vue'
 import Modal from '@/components/Modal/Modal.vue'
 import { NewUser } from '../SignUp/types'
 import TimelineItem from './TimelineItem.vue'
-import { useArticles } from '@/store/articles'
-import { IArticle } from '../../types'
+import { usePosts } from '@/store/posts'
+import { Post } from '../../types'
 import { Period } from './types'
 import { filterByPeriod } from './filters'
 
@@ -78,12 +78,12 @@ export default createComponent({
   props: {},
 
   setup(props, ctx) {
-    const articles = useArticles(ctx.root.$store)
+    const posts = usePosts(ctx.root.$store)
     const tabs = ref<Period>(['Today', 'This Week', 'This Month'])
     const currentPeriod = ref<Period>('Today')
 
-    if (!articles.state.touched) {
-      articles.actions.fetchAll()
+    if (!posts.state.touched) {
+      posts.actions.fetchAll()
     }
 
     const showShareModal = ref(false)
@@ -92,7 +92,7 @@ export default createComponent({
       currentPeriod.value = period
     }
 
-    const handleLike = (article: IArticle) => {
+    const handleLike = (post: Post) => {
       if (!1) {
         return
       }
@@ -107,13 +107,13 @@ export default createComponent({
     const display = computed(() => { 
       return filterByPeriod(
         currentPeriod.value,
-        articles.getters.articles)
+        posts.getters.posts)
     })
 
-    const loading = computed(() => articles.state.loading || !articles.state.touched)
+    const loading = computed(() => posts.state.loading || !posts.state.touched)
 
     return {
-      articles: display,
+      posts: display,
       loading,
       tabs,
       currentPeriod,

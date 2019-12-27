@@ -3,19 +3,19 @@ import { Mutations, Module, createMapper, Actions, Getters } from 'vuex-smart-mo
 import random from 'lodash/random'
 import { axios } from '@/resources/mockAxios'
 
-import { IArticle, IHashMap } from '@/types'
-import { mockArticles } from '@/resources/mockArticles'
+import { Post, HashMap } from '@/types'
+import { mockPosts } from '@/resources/mockPosts'
 import { mockUsers } from '@/resources/mockUsers'
 import moment from 'moment'
 
-class ArticlesState {
+class PostsState {
   ids: number[] = []
-  all: IHashMap<IArticle> = {}
+  all: HashMap<Post> = {}
   loading = false
   touched = false
 }
 
-class ArticlesMutations extends Mutations<ArticlesState> {
+class PostsMutations extends Mutations<PostsState> {
   REQUEST(payload = {}) {
     this.state.touched = true
     this.state.loading = true
@@ -25,16 +25,16 @@ class ArticlesMutations extends Mutations<ArticlesState> {
     this.state.loading = false    
   }
 
-  ADD_ARTICLE(article: IArticle) {
+  ADD_ARTICLE(post: Post) {
     this.state.all = { 
       ...this.state.all,
-      [article.id]: article
+      [post.id]: post
     }
-    this.state.ids.push(article.id)
+    this.state.ids.push(post.id)
   }
 
-  SET_ARTICLES(payload: IArticle[]) {
-    const all: IHashMap<IArticle> = {}
+  SET_ARTICLES(payload: Post[]) {
+    const all: HashMap<Post> = {}
     const ids: number[] = []
 
     for (const a of payload) {
@@ -47,24 +47,24 @@ class ArticlesMutations extends Mutations<ArticlesState> {
   }
 }
 
-class ArticlesGetters extends Getters<ArticlesState> {
-  get articles() {
+class PostsGetters extends Getters<PostsState> {
+  get posts() {
     return this.state.ids.map(x => this.state.all[x])
   }
 }
 
-class ArticlesActions extends Actions<
-  ArticlesState,
-  ArticlesGetters,
-  ArticlesMutations,
-  ArticlesActions
+class PostsActions extends Actions<
+  PostsState,
+  PostsGetters,
+  PostsMutations,
+  PostsActions
   > {
   async fetchAll() {
     this.commit('REQUEST', {})
     return new Promise(resolve => {
       setTimeout(async () => {
-        await axios.get<IArticle[]>('/articles')
-        this.commit('SET_ARTICLES', mockArticles)
+        await axios.get<Post[]>('/posts')
+        this.commit('SET_ARTICLES', mockPosts)
         this.commit('SUCCESS', {})
         resolve()
       }, random(500, 2000))
@@ -75,20 +75,20 @@ class ArticlesActions extends Actions<
     this.commit('REQUEST', {})
     return new Promise(resolve => {
       setTimeout(async () => {
-        await axios.get<IArticle>(`/articles/${id}`)
-        this.commit('ADD_ARTICLE', mockArticles[0])
+        await axios.get<Post>(`/posts/${id}`)
+        this.commit('ADD_ARTICLE', mockPosts[0])
         this.commit('SUCCESS', {})
         resolve()
       }, random(500, 2000))
     })
   }
 
-  async createPost(article: IArticle) {
+  async createPost(post: Post) {
     return new Promise(resolve => {
       setTimeout(async () => {
-        await axios.post<IArticle>('/articles', { article })
+        await axios.post<Post>('/posts', { post })
         this.commit('ADD_ARTICLE', { 
-          ...article,
+          ...post,
           id: 100,
           authorId: 1,
           created: moment(),
@@ -99,22 +99,22 @@ class ArticlesActions extends Actions<
   }
 }
 
-const articles = new Module({
-  state: ArticlesState,
-  mutations: ArticlesMutations,
-  actions: ArticlesActions,
-  getters: ArticlesGetters,
+const posts = new Module({
+  state: PostsState,
+  mutations: PostsMutations,
+  actions: PostsActions,
+  getters: PostsGetters,
 })
 
-const articlesMapper = createMapper(articles)
+const postsMapper = createMapper(posts)
 
-const useArticles = ($store: Store<undefined>) => {
-  return articles.context($store)
+const usePosts = ($store: Store<undefined>) => {
+  return posts.context($store)
 }
 
 
 export {
-  articlesMapper,
-  useArticles,
-  articles,
+  postsMapper,
+  usePosts,
+  posts,
 }

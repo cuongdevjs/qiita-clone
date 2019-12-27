@@ -1,12 +1,12 @@
 import random from 'lodash/random'
 import moment from 'moment'
 
-import data from './article-plain.txt'
-import markdown from './article.txt'
+import data from './post-plain.txt'
+import markdown from './post.txt'
 
-import { IArticle } from '@/types'
+import { Post } from '@/types'
 
-const mockArticles: IArticle[] = [
+const mockPosts: Post[] = [
   {
     id: 1,
     title: 'Hacking with Vue and TypeScript',
@@ -100,5 +100,5 @@ const mockArticles: IArticle[] = [
 ]
 
 export {
-  mockArticles
+  mockPosts
 }

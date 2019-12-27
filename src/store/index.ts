@@ -4,12 +4,12 @@ Vue.use(Vuex)
 
 import { createStore, Module } from 'vuex-smart-module'
 
-import { articles } from './articles'
+import { posts } from './posts'
 import { users } from './users'
 
 const root = new Module({
   modules: {
-    articles,
+    posts,
     users,
   }
 })

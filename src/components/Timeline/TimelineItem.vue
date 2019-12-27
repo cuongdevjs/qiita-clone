@@ -4,22 +4,22 @@
       <div>
         <div>
           <RouterLink
-            :to="linkTo(article.id)"
+            :to="linkTo(post.id)"
             class="link"
           >
-            {{ article.title }}
+            {{ post.title }}
           </RouterLink>
         </div>
         <div class="has-text-grey-light">
           By 
           <RouterLink to='#' class="link">
-            {{ getUser(article).username }}
+            {{ getUser(post).username }}
           </RouterLink> 
-          {{ article.created.fromNow() }} 
+          {{ post.created.fromNow() }} 
 
-          <span @click="() => handleLike(article)">
+          <span @click="() => handleLike(post)">
             <i class="far fa-thumbs-up" />
-            {{ article.likes }}
+            {{ post.likes }}
           </span>
         </div>
       </div>
@@ -30,16 +30,16 @@
 <script lang="ts">
 import { createComponent, computed, ref, reactive } from '@vue/composition-api'
 
-import { IArticle, IUser } from '@/types'
+import { Post, User } from '@/types'
 import { useUsers } from '@/store/users'
-import { useArticles } from '@/store/articles'
+import { usePosts } from '@/store/posts'
 
 export default createComponent({
   name: 'TimelineItem',
 
   props: {
-    article: {
-      type: Object as () => IArticle,
+    post: {
+      type: Object as () => Post,
       required: true,
     }
   },
@@ -48,11 +48,11 @@ export default createComponent({
     const users = useUsers(ctx.root.$store)
 
     const linkTo = (id: number) => `/posts/${id}`
-    const handleLike = (article: IArticle) => ctx.emit('like', article)
+    const handleLike = (post: Post) => ctx.emit('like', post)
 
     return {
       linkTo,
-      getUser: (article: IArticle): IUser => users.getters.getById(article.authorId),
+      getUser: (post: Post): User => users.getters.getById(post.authorId),
       handleLike,
     }
   },
