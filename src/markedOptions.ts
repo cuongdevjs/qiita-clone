@@ -11,7 +11,6 @@ renderer.heading = (text, level) => {
 
 const options: marked.MarkedOptions = {
   gfm: true,
-  sanitize: true,
   highlight: (code: string) => {
     return hljs.highlightAuto(code).value
   },

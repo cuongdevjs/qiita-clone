@@ -4,16 +4,17 @@
     <div class="control">
       <input 
         class="input" 
-        :class="blurred && (validity.valid ? 'is-success' : 'is-danger')"
+        :name="name"
+        :class="dirty && (validity.valid ? 'is-success' : 'is-danger')"
         :type="type" 
         :placeholder="placeholder" 
         :value="value"
         @input="handleInput"
-        @blur="handleBlur"
+        @keyup="handleValidation"
       >
     </div>
 
-    <span v-if="blurred">
+    <span v-if="dirty">
       <p v-if="validity.valid" class="help is-success">{{ validity.message }}</p>
       <p v-else class="help is-danger">{{ validity.message }}</p>
     </span>
@@ -23,6 +24,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { createComponent, ref, reactive } from '@vue/composition-api'
+import debounce from 'lodash/debounce'
+import throttle from 'lodash/throttle'
 
 import { Rule, validate } from './validation'
 
@@ -30,6 +33,11 @@ export default createComponent({
   name: 'ValidatorInput',
 
   props: {
+    name: {
+      type: String,
+      required: true,
+    },
+
     placeholder: {
       type: String,
       default: ''
@@ -57,30 +65,33 @@ export default createComponent({
   },
 
   setup(props, ctx) {
-    let blurred = ref(false)
     let validity = reactive<{ valid: boolean, message?: string }>({
       valid: true,
       message: ''
     })
+    const dirty = ref(false)
 
-    const handleBlur = () => {
-      if (props.validation) {
-        const { valid, message } = validate(props.value, props.validation)
-        validity.valid = valid
-        validity.message = message
-        blurred.value = true
-      }
-    }
+    const handleValidation = debounce(() => {
+      const { valid, message } = validate(props.value, props.validation!)
+      validity.valid = valid
+      validity.message = message
+      ctx.emit('validate', props.name, valid)
+    }, 500)
 
     const handleInput = (e: any) => {
       ctx.emit('input', e.target.value)
+      dirty.value = true
+
+      if (!props.validation) {
+        ctx.emit('validate', props.name, true)
+      }
     }
 
     return {
-      handleInput,
-      handleBlur,
+      dirty,
       validity,
-      blurred,
+      handleInput,
+      handleValidation,
     }
   }
 })

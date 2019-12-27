@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <SignUp @signup="handleSubmit">
-      <template v-slot:buttons>
-        <div class="control">
-          <button type="submit" class="button is-primary">Submit</button>
-        </div>
-      </template>
-    </SignUp>
-  </div>  
+  <SignUp @signup="handleSubmit" />
 </template>
 
 <script lang="ts">
