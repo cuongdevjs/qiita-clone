@@ -20,6 +20,7 @@
         <div class="navbar-item">
           <div class="buttons">
             <RouterLink 
+              data-test-new-post
               v-if="authenticated"
               class="button"
               to="/posts/new"
@@ -29,6 +30,7 @@
 
             <RouterLink 
               v-if="!authenticated"
+              data-test-sign-up
               class="button is-primary" 
               to="/users/new"
             >
@@ -37,6 +39,7 @@
 
             <RouterLink
               v-if="!authenticated"
+              data-test-log-in
               class="button is-light"
               to="/users/login"
             >
@@ -64,6 +67,8 @@ export default createComponent({
   components: {
     Profile,
   },
+
+  props: {},
 
   setup(props, ctx) {
     const users = useUsers(ctx.root.$store)

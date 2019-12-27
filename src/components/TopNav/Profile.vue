@@ -25,7 +25,10 @@
         </li>
 
         <li>
-          <a @click="handleLogout">Logout</a>
+          <a 
+            data-test-logout
+            @click="handleLogout"
+          >Logout</a>
         </li>
       </ul>
       </aside>
