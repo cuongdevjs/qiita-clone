@@ -14,9 +14,15 @@
       >
     </div>
 
-    <span v-if="dirty">
-      <p v-if="validity.valid" class="help is-success">{{ validity.message }}</p>
-      <p v-else class="help is-danger">{{ validity.message }}</p>
+    <span v-if="dirty" data-test-validations>
+      <p 
+        v-if="validity.valid" 
+        class="help is-success"
+        data-success
+      >
+        {{ validity.message }}
+      </p>
+      <p v-else data-error class="help is-danger">{{ validity.message }}</p>
     </span>
   </div>
 </template>
