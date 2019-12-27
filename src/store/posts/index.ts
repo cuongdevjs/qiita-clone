@@ -1,5 +1,5 @@
 import { Store } from 'vuex'
-import { Mutations, Module, createMapper, Actions, Getters } from 'vuex-smart-module'
+import { Mutations, Module, Actions, Getters } from 'vuex-smart-module'
 import moment from 'moment'
 
 import { axios } from '@/resources/mockAxios'
@@ -7,7 +7,14 @@ import { delay } from '@/store/utils'
 import { Post, HashMap } from '@/types'
 import { mockPosts } from '@/resources/mockPosts'
 
-class PostsState {
+export interface IState {
+  ids: number[]
+  all: HashMap<Post>
+  loading: boolean
+  touched: boolean
+}
+
+class PostsState implements IState {
   ids: number[] = []
   all: HashMap<Post> = {}
   loading = false
@@ -93,7 +100,6 @@ const posts = new Module({
   getters: PostsGetters,
 })
 
-const postsMapper = createMapper(posts)
 
 const usePosts = ($store: Store<undefined>) => {
   return posts.context($store)
@@ -101,7 +107,9 @@ const usePosts = ($store: Store<undefined>) => {
 
 
 export {
-  postsMapper,
+  PostsMutations,
+  PostsGetters,
+  PostsActions,
   usePosts,
   posts,
 }
