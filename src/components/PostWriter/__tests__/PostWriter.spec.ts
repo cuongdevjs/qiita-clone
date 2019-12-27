@@ -60,4 +60,24 @@ describe('PostWriter', () => {
 
     expect(wrapper.find('#rendered-markdown').isVisible()).toBe(false)
   })
+  
+  it('updates markdown', async () => {
+    const wrapper = mount(PostWriter, {
+      localVue: createLocalVue(),
+      propsData: {
+        post: {
+          ...article,
+        }
+      }
+    })
+
+    wrapper.find('#markdown').element.innerText = '# Some Markdown'
+    wrapper.find('#markdown').trigger('input')
+
+    await wrapper.vm.$nextTick()
+
+    expect(
+      wrapper.find('#rendered-markdown').element.innerHTML
+    ).toBe('<h1 id="some-markdown">Some Markdown</h1>\n')
+  })
 })
