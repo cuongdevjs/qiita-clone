@@ -79,6 +79,7 @@ export default createComponent({
 
     const handleValidation = debounce(() => {
       const { valid, message } = validate(props.value, props.validation!)
+      dirty.value = true
       validity.valid = valid
       validity.message = message
       ctx.emit('validate', props.name, valid)
@@ -86,7 +87,6 @@ export default createComponent({
 
     const handleInput = (e: any) => {
       ctx.emit('input', e.target.value)
-      dirty.value = true
 
       if (!props.validation) {
         ctx.emit('validate', props.name, true)

@@ -34,7 +34,7 @@
 
     <Portal to="modal">
       <Modal
-        v-show="showShareModal"
+        v-if="showShareModal"
         @hide="showShareModal = false"
       >
         <SignUp @signup="handleSignup">
