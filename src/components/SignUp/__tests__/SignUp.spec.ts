@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 
-import { createLocalVue } from '@/components/testHelper'
+import { createLocalVue } from '../../testHelper'
 import SignUp from '../SignUp.vue'
 import { NewUser } from '../types'
 

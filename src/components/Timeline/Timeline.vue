@@ -6,6 +6,7 @@
 
     <div 
       v-if="loading"
+      data-test-loading
       class="panel-block"
     >
       Loading...
@@ -16,6 +17,7 @@
         <a
           v-for="tab in tabs"
           :key="tab"
+          :data-test-tab="tab"
           :class="[ tab === currentPeriod ? 'is-active' : '']"
           @click="() => setActiveTab(tab)"
         >
@@ -87,7 +89,6 @@ export default createComponent({
     const articles = useArticles(ctx.root.$store)
     const tabs = ref<Period>(['Today', 'This Week', 'This Month'])
     const currentPeriod = ref<Period>('Today')
-
     articles.actions.fetchAll()
 
     const showShareModal = ref(false)
@@ -114,9 +115,11 @@ export default createComponent({
         articles.getters.articles)
     })
 
+    const loading = computed(() => articles.state.loading || !articles.state.touched)
+
     return {
       articles: display,
-      loading: computed(() => articles.state.loading || !articles.state.touched),
+      loading,
       tabs,
       currentPeriod,
       handleSignup,

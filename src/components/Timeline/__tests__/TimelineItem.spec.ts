@@ -1,6 +1,5 @@
 import VueRouter from 'vue-router'
 import CompositionApi from '@vue/composition-api'
-import moment from 'moment'
 import { mount, createLocalVue } from '@vue/test-utils'
 
 jest.mock('../../resources/article.txt', () => '')

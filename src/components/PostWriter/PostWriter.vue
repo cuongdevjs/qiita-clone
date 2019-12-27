@@ -5,6 +5,7 @@
         <ValidatorInput 
           v-model="title"
           type="text"
+          :name="title"
           :validation="titleValidation"
           placeholder="Title"
         />
@@ -17,7 +18,6 @@
           <input 
             id="new-tag"
             v-model="newTag"
-            @keyup.enter="handleAddTag"
             type="text" 
             class="input is-small is-inline"
             placeholder="Enter a tag"
@@ -82,10 +82,10 @@ import { createComponent, ref, watch, onMounted } from '@vue/composition-api'
 import marked from 'marked'
 
 import Tags from './Tags.vue'
-import ValidatorInput from '@/components/ValidatorInput/ValidatorInput.vue'
-import { minLength } from '@/components/ValidatorInput/validation'
-import { options } from '@/markedOptions'
-import { IArticle } from '@/types'
+import ValidatorInput from '../ValidatorInput/ValidatorInput.vue'
+import { minLength } from '../ValidatorInput/validation'
+import { options } from '../../markedOptions'
+import { IArticle } from '../../types'
 
 let editableDiv: HTMLDivElement | null = null
 

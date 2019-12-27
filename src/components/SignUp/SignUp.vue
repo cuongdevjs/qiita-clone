@@ -48,12 +48,14 @@
 import Vue from 'vue'
 import { createComponent, ref, reactive, computed } from '@vue/composition-api'
 
-import { NewUser } from '@/components/SignUp/types'
-import { minLength, Rule, format } from '@/components/ValidatorInput/validation'
+import { NewUser } from './types'
+import { minLength, Rule, format } from '../ValidatorInput/validation'
 import ValidatorInput from '@/components/ValidatorInput/ValidatorInput.vue'
 
 export default createComponent({
   name: 'SignUp',
+  
+  props: {},
 
   components: {
     ValidatorInput,

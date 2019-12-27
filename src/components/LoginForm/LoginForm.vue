@@ -46,6 +46,8 @@ export default createComponent({
     ValidatorInput,
   },
 
+  props: {},
+
   setup(props, ctx) {
     const username = ref('')
     const password = ref('')
