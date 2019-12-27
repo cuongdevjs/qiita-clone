@@ -21,6 +21,7 @@
             type="text" 
             class="input is-small is-inline"
             placeholder="Enter a tag"
+            @keyup.enter="handleAddTag"
           >
           <Tags 
             :tags="tags"

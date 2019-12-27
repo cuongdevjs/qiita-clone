@@ -4,6 +4,7 @@
       <ValidatorInput 
         v-model="username"
         type="text"
+        name="username"
         label="Username"
         placeholder="Username"
         data-test-username
@@ -12,6 +13,7 @@
       <ValidatorInput 
         data-test-password
         v-model="password"
+        name="password"
         type="password"
         label="Password"
         placeholder="Password"

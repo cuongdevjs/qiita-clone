@@ -2,7 +2,7 @@ import VueRouter from 'vue-router'
 import CompositionApi from '@vue/composition-api'
 import { mount, createLocalVue } from '@vue/test-utils'
 
-jest.mock('../../resources/article.txt', () => '')
+jest.mock('../../../resources/article.txt', () => '')
 jest.mock('@/store/users', () => ({
   useUsers: () => ({
     getters: {
