@@ -3,25 +3,24 @@ import moment from 'moment'
 
 import data from './post-plain.txt'
 import markdown from './post.txt'
-
 import { Post } from '@/types'
 
 const mockPosts: Post[] = [
   {
     id: 1,
-    title: 'Hacking with Vue and TypeScript',
+    title: 'Vue.js 3: Composition API, TypeScript and Unit Testing!',
     content: data,
     markdown,
     created: moment(),
     likes: random(0, 100),
     authorId: 1,
-    tags: ['javascript', 'typescript', 'vuejs'],
+    tags: ['vue.js 3.0', 'composition api', 'typescript', 'vuex', 'vue-router', 'unit testing']
   },
   {
     id: 2,
-    title: 'I created the exact same app in React and Vue. Here are the differences',
+    title: 'My production experience with used React and Vue',
     content: '',
-    created: moment().subtract(random(0, 10), 'days'),
+    created: moment().subtract(random(0, 24), 'hours'),
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
@@ -29,9 +28,9 @@ const mockPosts: Post[] = [
   },
   {
     id: 3,
-    title: 'Vue.js 2 Quickstart Tutorial 2017',
+    title: 'Vue.js 2 Quickstart Tutorial 2019',
     content: '',
-    created: moment().subtract(random(0, 10), 'days'),
+    created: moment().subtract(random(0, 24), 'hours'),
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
@@ -39,9 +38,9 @@ const mockPosts: Post[] = [
   },
   {
     id: 5,
-    title: 'Vue.js 2 Quickstart Tutorial 2017',
+    title: 'Scalable backends using Nest.js',
     content: '',
-    created: moment().subtract(random(0, 10), 'days'),
+    created: moment().subtract(random(0, 24), 'hours'),
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
@@ -51,7 +50,7 @@ const mockPosts: Post[] = [
     id: 6,
     title: '10 Things You Will Eventually Learn About JavaScript Projects',
     content: '',
-    created: moment().subtract(random(0, 10), 'days'),
+    created: moment().subtract(random(0, 24), 'hours'),
     likes: random(0, 100),
     authorId: random(1, 2),
     markdown: '',
@@ -69,7 +68,7 @@ const mockPosts: Post[] = [
   },
   {
     id: 8,
-    title: 'Vue 2 + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes',
+    title: 'Vue + Firebase: How to build a Vue app with Firebase authentication system in 15 minutes',
     content: '',
     created: moment().subtract(random(0, 10), 'days'),
     likes: random(0, 100),
@@ -96,6 +95,46 @@ const mockPosts: Post[] = [
     authorId: random(1, 2),
     markdown: '',
     tags: ['vuejs', 'devtools'],
+  },
+  {
+    id: 11,
+    title: 'Why I us TSX in my Vue components',
+    content: '',
+    created: moment().subtract(random(0, 10), 'days'),
+    likes: random(0, 100),
+    authorId: random(1, 2),
+    markdown: '',
+    tags: ['vuejs', 'tsx'],
+  },
+  {
+    id: 12,
+    title: 'Hooks vs Lifecycle methods',
+    content: '',
+    created: moment().subtract(random(0, 10), 'days'),
+    likes: random(0, 100),
+    authorId: random(1, 2),
+    markdown: '',
+    tags: ['vuejs', 'react', 'hooks'],
+  },
+  {
+    id: 13,
+    title: 'Testing JavaScript applications with Jest',
+    content: '',
+    created: moment().subtract(random(0, 10), 'days'),
+    likes: random(0, 100),
+    authorId: random(1, 2),
+    markdown: '',
+    tags: ['vuejs', 'testing', 'jest'],
+  },
+  {
+    id: 14,
+    title: 'Building a Chrome Extension with Vue.js',
+    content: '',
+    created: moment().subtract(random(0, 10), 'days'),
+    likes: random(0, 100),
+    authorId: random(1, 2),
+    markdown: '',
+    tags: ['vuejs', 'devtools', 'extension'],
   },
 ]
 

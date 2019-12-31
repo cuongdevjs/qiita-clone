@@ -13,7 +13,7 @@
     </div>
 
     <div class="columns">
-      <div class="column">
+      <div class="column is-five-fifths">
         <div class="field is-grouped">
           <input 
             id="new-tag"
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="column">
+      <div class="column is-one-fifth">
         <button 
           data-test-preview
           type="submit" 

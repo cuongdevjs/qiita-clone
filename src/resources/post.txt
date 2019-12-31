@@ -1,30 +1,12 @@
-<p>In this post we will build a mini blogging platform for software engineers. We will use:</p>
+<p>In this guide, we will build a blogging applications for developers. It supports writing posts using markdown.</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">demo</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'It supports syntax highlighting, too!'</span>)
+}</code></pre><p>In this course, I'll teach you:</p>
 <ul>
-<li>Vue.js 3 + composition API</li>
-<li>Typescript</li>
-<li><code>vuex-smart-module</code></li>
+<li>Vue.js 3 and the Composition API</li>
+<li>TypeScript</li>
+<li>Unit Testing with Jest and <code>vue-test-utils</code> (my favorite topic)</li>
+<li>Typesafe Vuex with <code>vuex-smart-module</code></li>
+<li>Using <code>vue-router</code></li>
+<li>...and much more!</li>
 </ul>
-<p>It will support authoring posts using markdown, include syntax highlighting via <code>highlight.js</code>.</p>
-<p>A simple sample of the composition API is as follows:</p>
-<pre><code class="language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"handleClick"</span>&gt;</span>
-      Clicky
-    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Count: </span><span class="hljs-template-variable">{{ count }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ts"</span>&gt;</span><span class="javascript">
-<span class="hljs-keyword">import</span> { ref, createComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createComponent({
-  setup() {
-    <span class="hljs-keyword">const</span> count = ref(<span class="hljs-number">0</span>)
-    <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> count.value += <span class="hljs-number">1</span>
-
-    <span class="hljs-keyword">return</span> { count, handleClick }
-  }
-})
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre>
-<p>Simple as that!</p>
